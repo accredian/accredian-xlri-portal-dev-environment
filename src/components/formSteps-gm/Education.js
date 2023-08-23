@@ -102,7 +102,10 @@ const Education = (props) => {
   const [previndustryOther, setprevIndustryOther] = useState("");
   const[sno,setsno]=useState(0)
   const [check,setChecked]=useState('')
+  const [check2,setChecked2]=useState('')
   const[sheetData,setSheetData]=useState([])
+  const [error, setError] = useState(false);
+  const [validCmpname, setCmpname] = useState(false);
   const [country, setCountry] = useState('');
   const [state, setState] = useState();
   const [city, setCity] = useState();
@@ -112,6 +115,34 @@ const Education = (props) => {
   const [country_name, setCountryName] = useState("");
   const [cities, setCities] = useState([]);
   const [stateCode, setStatecode] = useState();
+
+  const handleKeyPress = (event) => {
+    // const charCode = event.charCode;
+    // // ASCII range for allowed characters: 48-57 (0-9), 65-90 (A-Z), 97-122 (a-z), 32 (space)
+    // if (
+    //   (charCode >= 48 && charCode <= 57) || // 0-9
+    //   (charCode >= 65 && charCode <= 90) || // A-Z
+    //   (charCode >= 97 && charCode <= 122) || // a-z
+    //   charCode === 32 // space
+    // ) {
+    //   setError(false); // Clear the error state if the character is valid
+    // } else {
+    //   setError(true); // Set the error state if an invalid character is entered
+    //   // event.preventDefault();
+    // }
+    const inputValue = event.target.value;
+    // Regular expression to match any special character (excluding space)
+    const regex = /[!@#$%^&*()_+=[\]{};':"\\|,.<>/?~]/;
+     if (
+      regex.test(inputValue)
+    ) {
+      setError(true); // Clear the error state if the character is valid
+    } else {
+      setError(false); // Set the error state if an invalid character is entered
+      // event.preventDefault();
+    }
+    // setError();
+  };
   const LoaderClose = () => {
     setBackopen(false);
   };
@@ -189,6 +220,7 @@ const Education = (props) => {
     setprevIndustry('')
     setprevIndustryOther('')
     setChecked(false)
+    setChecked2(false)
 
   };
   const handleChangeImage = (event) => {
@@ -198,7 +230,17 @@ const Education = (props) => {
     setBachelorDegree(event.target.value);
   };
   const handleChangeCollegeName = (event) => {
-    setCollegename(event.target.value);
+    const regex = /[!@#$%^&*()_+=[\]{};':"\\|,.<>/?~]/;
+     if (
+      regex.test(event.target.value)
+    ) {
+      setError(true);
+    } else {
+      setError(false);
+     
+    }
+    setCollegename(event.target.value)
+    
   };
   const handleChangeYear = (event) => {
     setCompletionyear(event.target.value);
@@ -213,6 +255,15 @@ const Education = (props) => {
     setExp(event.target.value);
   };
   const handleChangeCpmanyName = (event) => {
+    const regex = /[!@#$%^&*()_+=[\]{};':"\\|,.<>/?~]/;
+    if (
+     regex.test(event.target.value)
+   ) {
+     setCmpname(true);
+   } else {
+    setCmpname(false);
+    
+   }
     setCompanyName(event.target.value);
   };
   const handleChangeCompanyemail = (event) => {
@@ -275,17 +326,20 @@ const Education = (props) => {
   const handleChange=( event)=>{
     setChecked(event.target.checked);
   }
-  console.log(
-    bachelorDegree,
-    collegeName,
-    yearOfCompletion,
-    cgpa,
-    companyname,
-    companyemail,
-    previuosCompany,
-    bachelorDocuments,
-    experienceDocuments
-  );
+  const handleChange2=( event)=>{
+    setChecked2(event.target.checked);
+  }
+  // console.log(
+  //   bachelorDegree,
+  //   collegeName,
+  //   yearOfCompletion,
+  //   cgpa,
+  //   companyname,
+  //   companyemail,
+  //   previuosCompany,
+  //   bachelorDocuments,
+  //   experienceDocuments
+  // );
   // if(props){
   useEffect(() => {
     // if (
@@ -300,7 +354,7 @@ const Education = (props) => {
     // ) {
     //   setNxt(false);
     // }
-    if(country_name&&state&&city&&pincode&&address&&collegeName&&yearOfCompletion&&qualification&&cgpa&&check&&bachelorDocuments&&(bachelorDegree=='others'?bachelorDegreeOther:bachelorDegree)&&(((isEmailValid?companyemail:false)&&companyname&&designation&&Total_exp&&(industry=='others'?industryOther:industry))||(previuosCompany && experienceDocuments &&Total_exp&&(previndustry=='others'?previndustryOther:previndustry)))){
+    if(country_name&&state&&city&&pincode&&address&&(error?false:collegeName)&&yearOfCompletion&&qualification&&cgpa&&check&&check2&&bachelorDocuments&&(bachelorDegree=='others'?bachelorDegreeOther:bachelorDegree)&&(((isEmailValid?companyemail:false)&&(validCmpname?false:companyname)&&designation&&Total_exp&&(industry=='others'?industryOther:industry))||(previuosCompany && experienceDocuments &&Total_exp&&(previndustry=='others'?previndustryOther:previndustry)))){
       setNxt(false);
     }
     else{
@@ -313,6 +367,7 @@ const Education = (props) => {
     yearOfCompletion,
     cgpa,
     check,
+    check2,
     companyname,
     companyemail,
     previuosCompany,
@@ -331,45 +386,263 @@ const Education = (props) => {
   
    console.log(sheetData,"sheet data")
  
-const InsertintoSheet=(data)=>{
+// const InsertintoSheet=(data)=>{
  
-  const formDatab = new FormData();
-  // formDatab.append("Sno",sn);
-  formDatab.append("Batch",data.batch);
-  formDatab.append("Name",data.name);
-  formDatab.append("Email",data.email);
-  formDatab.append("Gender",data.gender);
-  formDatab.append("Dob",data.dob);
-  formDatab.append("Phone",data.phone);
-  formDatab.append("City",data.city);
-  formDatab.append("Workex",data.experience);
-  formDatab.append("Education",data.highest_education);
-  formDatab.append("Company",data.company);
-  formDatab.append("Designation",data.designation);
-  formDatab.append("Industry",data.industry);
-  formDatab.append("WorkexLink",data.company_doc_file_path);
-  formDatab.append("Educationlink",data.degree_file_path);
-  formDatab.append("LMS","Yes");
-  formDatab.append("Enrollment","Yes");
+//   const formDatab = new FormData();
+//   // formDatab.append("Sno",sn);
+//   formDatab.append("Batch",data.batch);
+//   formDatab.append("Name",data.name);
+//   formDatab.append("Email",data.email);
+//   formDatab.append("Gender",data.gender);
+//   formDatab.append("Dob",data.dob);
+//   formDatab.append("Phone",data.phone);
+//   formDatab.append("City",data.city);
+//   formDatab.append("Workex",data.experience);
+//   formDatab.append("Education",data.highest_education);
+//   formDatab.append("Company",data.company);
+//   formDatab.append("Designation",data.designation);
+//   formDatab.append("Industry",data.industry);
+//   formDatab.append("WorkexLink",data.company_doc_file_path);
+//   formDatab.append("Educationlink",data.degree_file_path);
+//   formDatab.append("LMS","Yes");
+//   formDatab.append("Enrollment","Yes");
 
-fetch(
-"https://script.google.com/macros/s/AKfycbxxXozesaCrITu7k-VH_oMav_gvR18i3p_tetNdWOZQHYBoVKifQR9jdNTNb1ruVjgu7Q/exec",
-{
-method: "POST",
-body: formDatab
-}
-)
-.then((res) => res.json())
-.then((data) => {
-console.log(data);
-})
-.catch((error) => {
-console.log(error);
-});
+// fetch(
+// "https://script.google.com/macros/s/AKfycbxxXozesaCrITu7k-VH_oMav_gvR18i3p_tetNdWOZQHYBoVKifQR9jdNTNb1ruVjgu7Q/exec",
+// {
+// method: "POST",
+// body: formDatab
+// }
+// )
+// .then((res) => res.json())
+// .then((data) => {
+// console.log(data);
+// })
+// .catch((error) => {
+// console.log(error);
+// });
   
   
 
-}
+// }
+  // const handleNext = () => {
+  //   LoaderOpen();
+  //   if (
+  //     (bachelorDegree || bachelorDegreeOther) &&
+  //     collegeName &&
+  //     yearOfCompletion &&
+  //     cgpa &&
+  //     bachelorDocuments&&qualification
+  //   ) {
+  //     var formData = new FormData();
+  //     formData.append("file", bachelorDocuments);
+  //     formData.append("qualification", qualification);
+  //     formData.append("type", "insert_education_details");
+  //     formData.append("degree", bachelorDegree=="others"?bachelorDegreeOther:bachelorDegree);
+  //     formData.append("college_name", collegeName);
+  //     formData.append("completion_year", yearOfCompletion);
+  //     formData.append("cgpa", cgpa);
+  //     formData.append("user_id", parseInt(localStorage.getItem("user_id")));
+
+  //     axios({
+  //       method: "post",
+  //       url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/file-upload.php`,
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //       data: formData,
+  //     }).then(function (response) {
+  //       if (response.data.status == 200) {
+  //         if (companyname) {
+  //           if (companyname && companyemail && Total_exp &&designation) {
+  //             axios({
+  //               method: "post",
+  //               url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
+  //               data: {
+  //                 type: "insert_work_details",
+  //                 user_id: parseInt(localStorage.getItem("user_id")),
+  //                 company_name: companyname,
+  //                 company_email: companyemail,
+  //                 designation:designation,
+  //                 current_industry:industry=="others"?industryOther:industry,
+  //                 experience:Total_exp,
+  //                 working: "yes",
+  //               },
+  //             }).then((response) => {
+  //               if (response.data.status == 200) {
+                       
+                 
+                  
+  //                 const options = {
+  //                   headers: {
+  //                     "Access-Control-Allow-Origin": "*",
+  //                     "Content-Type": "application/json",
+  //                   },
+  //                 };
+  //                 const sendData = {
+  //                   user_id: localStorage.getItem("user_id"),
+  //                 };
+
+  //                 axios({
+  //                   method: "post",
+  //                   url: `${process.env.REACT_APP_BASE_URL}/generate-xlri-applications.php`,
+  //                   data: {
+  //                     user_id: localStorage.getItem("user_id"),
+  //                   },
+
+  //                   // options
+  //                 })
+                   
+  //                   .then((response) => {
+  //                     if (response.data.status == 200) {
+  //                       LoaderClose();
+  //                       axios({
+  //                         method: "post",
+  //                         url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
+  //                         data: {
+  //                           type: "fetch_xlri_sheet_data",
+  //                           user_id: parseInt(localStorage.getItem("user_id")),
+  //                         },
+  //                       }).then((res)=>{
+  //                        if(res.data[0].status==200){
+  //                         InsertintoSheet(res.data[0])
+  //                         axios({
+  //                           method: "post",
+  //                           url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
+  //                           data: {
+  //                             type: "update_step_four_status",
+  //                             user_id: parseInt(localStorage.getItem("user_id")),
+  //                             status: "complete",
+  //                           },
+  //                         }).then((response) => {
+  //                           if (response.data.status == 200) {
+  //                             props.stepCount();
+  //                             props.userd();
+                            
+  //                           }
+  //                         });
+                         
+  //                        }
+  //                        else{
+  //                         toast.error("Server error please try after some time", {
+  //                           position: "top-right",
+  //                           autoClose: 2000,
+  //                           hideProgressBar: false,
+  //                           closeOnClick: true,
+  //                           pauseOnHover: true,
+  //                           draggable: true,
+  //                           progress: undefined,
+  //                           theme: "colored",
+  //                         });
+  //                       }
+                          
+         
+                        
+                       
+  //                       })
+                       
+  //                     }
+  //                   });
+  //               }
+  //             });
+  //           }
+  //         } else if (previuosCompany && experienceDocuments) {
+  //           const formData = new FormData();
+  //           formData.append("file", experienceDocuments);
+  //           formData.append("working", "no");
+  //           formData.append("type", 'insert_work_details');
+  //           formData.append("company_name", previuosCompany);
+  //           formData.append("previous_industry",previndustry=="others"?previndustryOther:previndustry );
+  //           formData.append("experience", Total_exp);
+  //           formData.append(
+  //             "user_id",
+  //             parseInt(localStorage.getItem("user_id"))
+  //           );
+  //           axios({
+  //             method: "post",
+  //             url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/file-upload.php`,
+  //             headers: { "Content-Type": "multipart/form-data" },
+  //             data: 
+  //               // type: "insert_work_details",
+  //               formData,
+              
+  //           }).then((response) => {
+  //             props.handleNext4();
+  //             if (response.data.status == 200) {
+               
+  //              const options = {
+  //                 headers: {
+  //                   "Access-Control-Allow-Origin": "*",
+  //                   "Content-Type": "application/json",
+  //                 },
+  //               };
+  //               const sendData = {
+  //                 user_id: localStorage.getItem("user_id"),
+  //               };
+  //               axios({
+  //                 method: "post",
+  //                 url: `${process.env.REACT_APP_BASE_URL}/generate-xlri-applications.php`,
+  //                 data: {
+  //                   user_id: localStorage.getItem("user_id"),
+  //                 },
+
+  //                 // options
+  //               }).then((response) => {
+  //                 if (response.data.status == 200) {
+  //                   LoaderClose();
+  //                   axios({
+  //                     method: "post",
+  //                     url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
+  //                     data: {
+  //                       type: "fetch_xlri_sheet_data",
+  //                       user_id: parseInt(localStorage.getItem("user_id")),
+  //                     },
+  //                   }).then((res)=>{
+  //                    if(res.data[0].status==200){
+  //                     InsertintoSheet(res.data[0])
+  //                     axios({
+  //                       method: "post",
+  //                       url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
+  //                       data: {
+  //                         type: "update_step_four_status",
+  //                         user_id: parseInt(localStorage.getItem("user_id")),
+  //                         status: "complete",
+  //                       },
+  //                     }).then((response) => {
+  //                       if (response.data.status == 200) {
+                          
+  //                         props.stepCount();
+  //                     props.userd();
+  //                       }
+  //                     });
+                     
+  //                    }
+  //                    else{
+  //                     toast.error("Server error please try after some time", {
+  //                       position: "top-right",
+  //                       autoClose: 2000,
+  //                       hideProgressBar: false,
+  //                       closeOnClick: true,
+  //                       pauseOnHover: true,
+  //                       draggable: true,
+  //                       progress: undefined,
+  //                       theme: "colored",
+  //                     });
+  //                    }
+                      
+     
+                    
+                   
+  //                   })
+                   
+
+  //                 }
+  //               });
+  //             }
+  //           });
+  //         }
+  //       }
+  //     });
+  //   }
+  // };
   const handleNext = () => {
     LoaderOpen();
     if (
@@ -429,208 +702,18 @@ console.log(error);
                         localStorage.setItem("currentStepStatus", res.data.data.current_step_status);
                         }
                     })
-          // if (companyname) {
-          //   if (companyname && companyemail && Total_exp &&designation) {
-          //     axios({
-          //       method: "post",
-          //       url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data-test.php`,
-          //       data: {
-          //         type: "insert_work_details_test",
-          //         user_id: parseInt(localStorage.getItem("user_id")),
-          //         company_name: companyname,
-          //         company_email: companyemail,
-          //         designation:designation,
-          //         current_industry:industry=="others"?industryOther:industry,
-          //         experience:Total_exp,
-          //         working: "yes",
-          //       },
-          //     }).then((response) => {
-          //       if (response.data.status == 200) {
-                       
-                 
-                  
-          //         const options = {
-          //           headers: {
-          //             "Access-Control-Allow-Origin": "*",
-          //             "Content-Type": "application/json",
-          //           },
-          //         };
-          //         const sendData = {
-          //           user_id: localStorage.getItem("user_id"),
-          //         };
-
-          //         axios({
-          //           method: "post",
-          //           url: `${process.env.REACT_APP_BASE_URL}/generate-xlri-applications-test.php`,
-          //           data: {
-          //             user_id: localStorage.getItem("user_id"),
-          //           },
-
-          //           // options
-          //         })
-                   
-          //           .then((response) => {
-          //             if (response.data.status == 200) {
-          //               LoaderClose();
-          //               axios({
-          //                 method: "post",
-          //                 url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data-test.php`,
-          //                 data: {
-          //                   type: "fetch_xlri_sheet_data_test",
-          //                   user_id: parseInt(localStorage.getItem("user_id")),
-          //                 },
-          //               }).then((res)=>{
-          //                if(res.data[0].status==200){
-          //                 InsertintoSheet(res.data[0])
-          //                 axios({
-          //                   method: "post",
-          //                   url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data-test.php`,
-          //                   data: {
-          //                     type: "update_step_four_status_test",
-          //                     user_id: parseInt(localStorage.getItem("user_id")),
-          //                     status: "complete",
-          //                   },
-          //                 }).then((response) => {
-          //                   if (response.data.status == 200) {
-          //                     props.stepCount();
-          //                     props.userd();
-                            
-          //                   }
-          //                 });
-                         
-          //                }
-          //                else{
-          //                 toast.error("Server error please try after some time", {
-          //                   position: "top-right",
-          //                   autoClose: 2000,
-          //                   hideProgressBar: false,
-          //                   closeOnClick: true,
-          //                   pauseOnHover: true,
-          //                   draggable: true,
-          //                   progress: undefined,
-          //                   theme: "colored",
-          //                 });
-          //               }
-                          
          
-                        
-                       
-          //               })
-                       
-          //             }
-          //           });
-          //       }
-          //     });
-          //   }
-          // } else if (previuosCompany && experienceDocuments) {
-          //   const formData = new FormData();
-          //   formData.append("file", experienceDocuments);
-          //   formData.append("working", "no");
-          //   formData.append("type", 'insert_work_details_test');
-          //   formData.append("company_name", previuosCompany);
-          //   formData.append("previous_industry",previndustry=="others"?previndustryOther:previndustry );
-          //   formData.append("experience", Total_exp);
-          //   formData.append(
-          //     "user_id",
-          //     parseInt(localStorage.getItem("user_id"))
-          //   );
-          //   axios({
-          //     method: "post",
-          //     url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/file-upload-test.php`,
-          //     headers: { "Content-Type": "multipart/form-data" },
-          //     data: 
-          //       // type: "insert_work_details",
-          //       formData,
-              
-          //   }).then((response) => {
-          //     props.handleNext4();
-          //     if (response.data.status == 200) {
-               
-          //      const options = {
-          //         headers: {
-          //           "Access-Control-Allow-Origin": "*",
-          //           "Content-Type": "application/json",
-          //         },
-          //       };
-          //       const sendData = {
-          //         user_id: localStorage.getItem("user_id"),
-          //       };
-          //       axios({
-          //         method: "post",
-          //         url: `${process.env.REACT_APP_BASE_URL}/generate-xlri-applications-test.php`,
-          //         data: {
-          //           user_id: localStorage.getItem("user_id"),
-          //         },
-
-          //         // options
-          //       }).then((response) => {
-          //         if (response.data.status == 200) {
-          //           LoaderClose();
-          //           axios({
-          //             method: "post",
-          //             url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data-test.php`,
-          //             data: {
-          //               type: "fetch_xlri_sheet_data_test",
-          //               user_id: parseInt(localStorage.getItem("user_id")),
-          //             },
-          //           }).then((res)=>{
-          //            if(res.data[0].status==200){
-          //             InsertintoSheet(res.data[0])
-          //             axios({
-          //               method: "post",
-          //               url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data-test.php`,
-          //               data: {
-          //                 type: "update_step_four_status_test",
-          //                 user_id: parseInt(localStorage.getItem("user_id")),
-          //                 status: "complete",
-          //               },
-          //             }).then((response) => {
-          //               if (response.data.status == 200) {
-                          
-          //                 props.stepCount();
-          //             props.userd();
-          //               }
-          //             });
-                     
-          //            }
-          //            else{
-          //             toast.error("Server error please try after some time", {
-          //               position: "top-right",
-          //               autoClose: 2000,
-          //               hideProgressBar: false,
-          //               closeOnClick: true,
-          //               pauseOnHover: true,
-          //               draggable: true,
-          //               progress: undefined,
-          //               theme: "colored",
-          //             });
-          //            }
-                      
-     
-                    
-                   
-          //           })
-                   
-
-          //         }
-          //       });
-          //     }
-          //   });
-          // }
         }
       });
     }
   };
-
   //  boxShadow: "0 0 1rem 0 rgba(0, 0, 0, .2)",
   //  // border-radius: 5px;
   //  backgroundColor: "rgba(255, 255, 255, .15)",
   return (
     <>
       <Box sx={{display: { xs: "none", lg: "block"}}}>
-
-
- <Box
+      <Box
           sx={{ mb: 0.5, p: 1, borderRadius: "5px" }}
           onClick={handleClickaddress}
         >
@@ -809,12 +892,6 @@ console.log(error);
             
           </Box>
         </Box>
-
-
-
-
-
-
         <Box
           sx={{ mb: 1, p: 1, borderRadius: "5px" }}
           onClick={handleClickPersonal}
@@ -957,11 +1034,14 @@ console.log(error);
             >
               College/University Name <span style={{ color: "red" }}>*</span>
             </Typography>
-            <BootstrapInput
+            <TextField
               onChange={handleChangeCollegeName}
               value={collegeName}
-              sx={{ width: 480 }}
+              sx={{ width: 480,background:"#fff",borderRadius:"5px" }}
               size="small"
+              error={error}
+        // onKeyPress={handleKeyPress}
+        helperText={error ? 'Special characters are not allowed' : ''}
               //  onKeyPress={(e) => {
               //     if (new RegExp(/[a-zA-Z]/).test(e.key)) {
               //     } else e.preventDefault();
@@ -1084,7 +1164,7 @@ console.log(error);
             Are you currently working?
           </Typography>
           <FormControl fullWidth>
-            {/* <InputLabel id="demo-simple-select-label">Select a Option</InputLabel> */}
+            {/* <InputLabel id="demo-simple-select-label">Payment Type</InputLabel> */}
             <Select
               size="small"
               sx={{ width: 480, background: "#fff", mt: 1 }}
@@ -1094,8 +1174,8 @@ console.log(error);
               onChange={handleChangeChoice}
               defaultValue={"select"}
             >
-              <MenuItem disabled="true" value="">
-                Select a option
+              <MenuItem disabled="true" value={"select"}>
+                select
               </MenuItem>
               <MenuItem value={"Yes"}>Yes</MenuItem>
               <MenuItem value={"No"}>No</MenuItem>
@@ -1225,7 +1305,20 @@ sx={{
                   >
                     Current Company Name <span style={{ color: "red" }}>*</span>
                   </Typography>
-                  <BootstrapInput
+                  <TextField
+              onChange={handleChangeCpmanyName}
+              value={companyname}
+              sx={{ width: 480,background:"#fff",borderRadius:"5px" }}
+              size="small"
+              error={validCmpname}
+        // onKeyPress={handleKeyPress}
+        helperText={validCmpname ? 'Special characters are not allowed' : ''}
+              //  onKeyPress={(e) => {
+              //     if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+              //     } else e.preventDefault();
+              //   }}
+            />
+                  {/* <BootstrapInput
                     onChange={handleChangeCpmanyName}
                     value={companyname}
                     sx={{ width: 480 }}
@@ -1234,7 +1327,7 @@ sx={{
                     //   if (new RegExp(/[a-zA-Z]/).test(e.key)) {
                     //   } else e.preventDefault();
                     // }}
-                  />
+                  /> */}
                 </Box>
                 <Box>
   <Typography
@@ -1299,13 +1392,43 @@ sx={{
                
 
 </Box>
-<FormGroup sx={{display:"flex"}}>
-      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
+{/* <FormGroup sx={{display:"flex"}}>
+     
       <FormControlLabel required control={<Checkbox onChange={handleChange} style={{color:"#fff"}}   />} href="https://accredian.com/iitg-admissions-policy/" label={
          <div style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
         I agree to confirm that I have gone through the program and it’s details and the program fits my career objective{' '}
+        
+       </div>
+      } />
+     
+     
+    </FormGroup> */}
+      <Box sx={{mt:2}}>
+                    <FormGroup sx={{mb:1}}>
+      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
+      <FormControlLabel required control={<Checkbox checked={check}  onChange={handleChange} style={{color:"#fff"}} />} label={
+         <div style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
+         I accept all the terms and conditions{' '}
+         <a
+           href="https://accredian.com/xlri-admissions-policy/"
+           target="_blank"
+           rel="noopener noreferrer"
+           style={{color:"blue",cursor:"pointer",textDecoration:"none"}}
+          //  className={classes.hyperlink}
+         >
+           (Read more)<span style={{color:"red"}}>*</span>
+         </a>
+       </div>
+      } />
+      {/* <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}
+    </FormGroup>
+    <FormGroup sx={{display:"flex",mt:1}}>
+      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
+      <FormControlLabel required control={<Checkbox checked={check2} onChange={handleChange2} style={{color:"#fff"}} />} href="https://accredian.com/xlri-admissions-policy/" label={
+         <div style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
+        I confirm that I have gone through the program and it’s details and the program fits my career objective<span style={{color:"red"}}>*</span>{' '}
          {/* <a
-           href="https://accredian.com/iitg-admissions-policy/"
+           href="https://accredian.com/xlri-admissions-policy/"
            target="_blank"
            rel="noopener noreferrer"
            style={{color:"blue",cursor:"pointer"}}
@@ -1318,6 +1441,7 @@ sx={{
      
       {/* <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}
     </FormGroup>
+                    </Box>
               </Box>
       
             ) : (
@@ -1478,13 +1602,43 @@ sx={{
 
                 
               </Box>
-              <FormGroup sx={{display:"flex"}}>
-      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
-      <FormControlLabel required control={<Checkbox onChange={handleChange} style={{color:"#fff"}}   />} href="https://accredian.com/iitg-admissions-policy/" label={
+              {/* <FormGroup sx={{display:"flex"}}>
+      
+      <FormControlLabel required control={<Checkbox onChange={handleChange} style={{color:"#fff"}}   />} href="https://accredian.com/xlri-admissions-policy/" label={
          <div style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
         I agree to confirm that I have gone through the program and it’s details and the program fits my career objective{' '}
+         
+       </div>
+      } />
+     
+      
+    </FormGroup> */}
+    <Box sx={{mt:2}}>
+                    <FormGroup sx={{mb:1}}>
+      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
+      <FormControlLabel required control={<Checkbox checked={check}  onChange={handleChange} style={{color:"#fff"}} />} label={
+         <div  style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
+         I accept all the terms and conditions{' '}
+         <a
+           href="https://accredian.com/xlri-admissions-policy/"
+           target="_blank"
+           rel="noopener noreferrer"
+           style={{color:"blue",cursor:"pointer",textDecoration:"none"}}
+          //  className={classes.hyperlink}
+         >
+           (Read more)<span style={{color:"red"}}>*</span>
+         </a>
+       </div>
+      } />
+      {/* <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}
+    </FormGroup>
+    <FormGroup sx={{display:"flex",mt:1}}>
+      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
+      <FormControlLabel required control={<Checkbox checked={check2} onChange={handleChange2} style={{color:"#fff"}} />} href="https://accredian.com/xlri-admissions-policy/" label={
+         <div  style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
+        I confirm that I have gone through the program and it’s details and the program fits my career objective<span style={{color:"red"}}>*</span>{' '}
          {/* <a
-           href="https://accredian.com/iitg-admissions-policy/"
+           href="https://accredian.com/xlri-admissions-policy/"
            target="_blank"
            rel="noopener noreferrer"
            style={{color:"blue",cursor:"pointer"}}
@@ -1497,6 +1651,7 @@ sx={{
      
       {/* <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}
     </FormGroup>
+                    </Box>
 
               </Box>
               
@@ -1524,7 +1679,6 @@ sx={{
 
       {/* mobile version */}
       <Box sx={{display: { xs: "block", lg: "none"}}}>
-
 
       <Box
           sx={{ mb: 0.5, p: 1, borderRadius: "5px" }}
@@ -1700,8 +1854,6 @@ sx={{
             
           </Box>
         </Box>
-
-
         <Box
           sx={{ mb: 1, p: 1, borderRadius: "5px" }}
           onClick={handleClickPersonal}
@@ -1830,11 +1982,14 @@ sx={{
             >
               College/University Name <span style={{ color: "red" }}>*</span>
             </Typography>
-            <BootstrapInput
+            <TextField
               onChange={handleChangeCollegeName}
               value={collegeName}
-              sx={{ width: 220 }}
+              sx={{ width: 220,background:"#fff",borderRadius:"5px" }}
               size="small"
+              error={error}
+        // onKeyPress={handleKeyPress}
+        helperText={error ? 'Special characters are not allowed' : ''}
               //  onKeyPress={(e) => {
               //     if (new RegExp(/[a-zA-Z]/).test(e.key)) {
               //     } else e.preventDefault();
@@ -2086,7 +2241,20 @@ sx={{
                   >
                     Current Company Name <span style={{ color: "red" }}>*</span>
                   </Typography>
-                  <BootstrapInput
+                  <TextField
+              onChange={handleChangeCpmanyName}
+              value={companyname}
+              sx={{ width: 220,background:"#fff",borderRadius:"5px" }}
+              size="small"
+              error={validCmpname}
+        // onKeyPress={handleKeyPress}
+        helperText={validCmpname ? 'Special characters are not allowed' : ''}
+              //  onKeyPress={(e) => {
+              //     if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+              //     } else e.preventDefault();
+              //   }}
+            />
+                  {/* <BootstrapInput
                     onChange={handleChangeCpmanyName}
                     value={companyname}
                     sx={{ width: 220 }}
@@ -2095,7 +2263,7 @@ sx={{
                     //   if (new RegExp(/[a-zA-Z]/).test(e.key)) {
                     //   } else e.preventDefault();
                     // }}
-                  />
+                  /> */}
                 </Box>
                 <Box>
   <Typography
@@ -2148,11 +2316,41 @@ sx={{
                     size="small"
                   />
                 </Box>
-                <FormGroup sx={{display:"flex"}}>
-      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
-      <FormControlLabel required control={<Checkbox onChange={handleChange} style={{color:"#fff"}}   />} href="https://accredian.com/iitg-admissions-policy/" label={
+                {/* <FormGroup sx={{display:"flex"}}>
+      
+      <FormControlLabel required control={<Checkbox onChange={handleChange} style={{color:"#fff"}}   />} href="https://accredian.com/xlri-admissions-policy/" label={
          <div style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
         I agree to confirm that I have gone through the program and it’s details and the program fits my career objective{' '}
+        
+       </div>
+      } />
+     
+     
+    </FormGroup> */}
+     <Box sx={{mt:2}}>
+                    <FormGroup sx={{mb:1}}>
+      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
+      <FormControlLabel required control={<Checkbox checked={check}  onChange={handleChange} style={{color:"#fff"}} />} label={
+         <div  style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
+         I accept all the terms and conditions{' '}
+         <a
+           href="https://accredian.com/xlri-admissions-policy/"
+           target="_blank"
+           rel="noopener noreferrer"
+           style={{color:"blue",cursor:"pointer",textDecoration:"none"}}
+          //  className={classes.hyperlink}
+         >
+           (Read more)<span style={{color:"red"}}>*</span>
+         </a>
+       </div>
+      } />
+      {/* <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}
+    </FormGroup>
+    <FormGroup sx={{display:"flex",mt:1}}>
+      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
+      <FormControlLabel required control={<Checkbox checked={check2} onChange={handleChange2} style={{color:"#fff"}} />} href="https://accredian.com/xlri-admissions-policy/" label={
+         <div  style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
+        I confirm that I have gone through the program and it’s details and the program fits my career objective<span style={{color:"red"}}>*</span>{' '}
          {/* <a
            href="https://accredian.com/iitg-admissions-policy/"
            target="_blank"
@@ -2167,6 +2365,7 @@ sx={{
      
       {/* <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}
     </FormGroup>
+                    </Box>
               </Box>
             ) : (
               <Box
@@ -2307,11 +2506,41 @@ sx={{
                     type="file"
                   ></TextField>
                 </Box>
-                <FormGroup sx={{display:"flex"}}>
-      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
+                {/* <FormGroup sx={{display:"flex"}}>
+    
       <FormControlLabel required control={<Checkbox onChange={handleChange} style={{color:"#fff"}}   />} href="https://accredian.com/iitg-admissions-policy/" label={
          <div style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
         I agree to confirm that I have gone through the program and it’s details and the program fits my career objective{' '}
+         
+       </div>
+      } />
+     
+     
+    </FormGroup> */}
+     <Box sx={{mt:2}}>
+                    <FormGroup sx={{mb:1}}>
+      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
+      <FormControlLabel required control={<Checkbox checked={check}  onChange={handleChange} style={{color:"#fff"}} />} label={
+         <div  style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
+         I accept all the terms and conditions{' '}
+         <a
+           href="https://accredian.com/xlri-admissions-policy/"
+           target="_blank"
+           rel="noopener noreferrer"
+           style={{color:"blue",cursor:"pointer",textDecoration:"none"}}
+          //  className={classes.hyperlink}
+         >
+           (Read more)<span style={{color:"red"}}>*</span>
+         </a>
+       </div>
+      } />
+      {/* <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}
+    </FormGroup>
+    <FormGroup sx={{display:"flex",mt:1}}>
+      {/* <FormControlLabel control={<Checkbox defaultChecked />} label="Label" /> */}
+      <FormControlLabel required control={<Checkbox checked={check2} onChange={handleChange2} style={{color:"#fff"}} />} href="https://accredian.com/xlri-admissions-policy/" label={
+         <div  style={{color:"#fff",fontWeight:"bold",fontSize:"14px"}}>
+        I confirm that I have gone through the program and it’s details and the program fits my career objective<span style={{color:"red"}}>*</span>{' '}
          {/* <a
            href="https://accredian.com/iitg-admissions-policy/"
            target="_blank"
@@ -2326,6 +2555,7 @@ sx={{
      
       {/* <FormControlLabel disabled control={<Checkbox />} label="Disabled" /> */}
     </FormGroup>
+                    </Box>
               </Box>
             )}
           </Box>

@@ -127,9 +127,9 @@ console.log(courses,"popopop")
         data: {
           type: "xlri_sign_up",
           username: convertEmailToLowerCase(email),
-          firstname: firstname,
-          middlename: middlename,
-          lastname: lastname,
+          firstname: firstname.trim(),
+          middlename: middlename.trim(),
+          lastname: lastname.trim(),
           program_id: courses,
           // password: password,
         },
