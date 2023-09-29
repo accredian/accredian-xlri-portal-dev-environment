@@ -56,14 +56,14 @@ export default function SignUp() {
   const [category, setCategory] = useState(" ");
   const [coursescode, setCoursescode] = useState(" ");
   const [backopen, setBackopen] = useState(false);
-  const handleChangecourse = (pcode, pid, cid) => {
+  const handleChangecourse = (pid, name) => {
     setCourses(pid);
-    setCoursescode(pcode);
-    setCategory(cid);
+    // setCoursescode(pcode);
+    // setCategory(cid);
 
    
   };
-  console.log(courses,"uuuu");
+  // console.log(courses,"uuuu");
   const LoaderClose = () => {
     setBackopen(false);
   };
@@ -106,97 +106,96 @@ export default function SignUp() {
   }
   // const final_mail=convertEmailToLowerCase("Tambat.prafull@gmail.com")
   // console.log(final_mail,"ttt")
-console.log(courses,"popopop")
+
   const handleSubmit = (e) => {
     LoaderOpen();
     e.preventDefault();
-    if (email && firstname && lastname &&courses) {
-      // if(password===confirmPassword){
-      console.log("yyyyyyyyyyyyyyyyy");
-      // const sendData = {
-      //     type: 'xlri_sign_up',
+    // if(courses==38){
 
-      //     username:email,
-      //     password:password
-
-      //   };
-      // ${process.env.REACT_APP_BASE_URL}/xlri-backend/shubham-data.php
-      axios({
-        method: "post",
-        url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/wpdata-new.php`,
-        data: {
-          type: "xlri_sign_up",
-          username: convertEmailToLowerCase(email),
-          firstname: firstname.trim(),
-          middlename: middlename.trim(),
-          lastname: lastname.trim(),
-          program_id: courses,
-          // password: password,
-        },
-      }).then(function (response) {
-        LoaderClose();
-        if (response.data.status == 200) {
-          toast.success("Your account has been created successfully", {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-          setEmail("");
-          setPassword("");
-          setComfirm("");
-          setTimeout(() => {
-            navigate("/login");
-          }, 2000);
-        } else {
-          toast.error(
-            "Your account has already been created. Please log in to access the portal.",
-            {
+    // }
+    // else{
+      if (email && firstname && lastname &&courses) {
+        // if(password===confirmPassword){
+      //  localStorage.setItem("program",courses)
+      
+        axios({
+          method: "post",
+          url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/wpdata-test.php`,
+          data: {
+            type: "xlri_sign_up_test",
+            username: convertEmailToLowerCase(email),
+            firstname: firstname.replace(/\s/g, ''),
+            middlename: middlename.replace(/\s/g, ''),
+            lastname: lastname.replace(/\s/g, ''),
+            category_id: courses,
+            // password: password,
+          },
+        }).then(function (response) {
+          LoaderClose();
+          if (response.data.status == 200) {
+            toast.success("Your account has been created successfully", {
               position: "top-right",
-              autoClose: 4000,
+              autoClose: 2000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
               theme: "colored",
-            }
-          );
-        }
-      });
-
-      // }
-      // else{
-      //   LoaderClose()
-      //     toast.error(" Password are not matched", {
-      //         position: "top-right",
-      //         autoClose: 2000,
-      //         hideProgressBar: false,
-      //         closeOnClick: true,
-      //         pauseOnHover: true,
-      //         draggable: true,
-      //         progress: undefined,
-      //         theme: "colored",
-      //       });
-
-      // }
-    } else {
-      LoaderClose();
-      toast.error("Please enter all the required fields", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
+            });
+            setEmail("");
+            setPassword("");
+            setComfirm("");
+            setTimeout(() => {
+              navigate("/login");
+            }, 2000);
+          } else {
+            toast.error(
+              "Your account has already been created. Please log in to access the portal.",
+              {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+              }
+            );
+          }
+        });
+  
+        // }
+        // else{
+        //   LoaderClose()
+        //     toast.error(" Password are not matched", {
+        //         position: "top-right",
+        //         autoClose: 2000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //         theme: "colored",
+        //       });
+  
+        // }
+      } else {
+        LoaderClose();
+        toast.error("Please enter all the required fields", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    // }
+    
   };
   const BootstrapInput = styled(InputBase)(({ theme }) => ({
     "label + &": {
@@ -240,9 +239,10 @@ console.log(courses,"popopop")
   function fathcprogram() {
     axios({
       method: "post",
-      url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
+      url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/new-data-test.php`,
       data: {
-        type: "fetch_xlri_programs",
+        // type: "fetch_xlri_programs",
+        type:"fetch_xlri_category_test"
       },
     }).then(function (response) {
       console.log(response);
@@ -372,6 +372,7 @@ console.log(courses,"popopop")
                                 <span style={{ color: "red" }}>*</span>
                               </Typography>
                               <TextField
+                              required
                                 onChange={handleChangeFirstName}
                                 fullWidth
                                 sx={{
@@ -433,6 +434,7 @@ console.log(courses,"popopop")
                                 Last Name<span style={{ color: "red" }}>*</span>
                               </Typography>
                               <TextField
+                              required
                                 onChange={handleChangeLastName}
                                 fullWidth
                                 sx={{
@@ -459,6 +461,7 @@ console.log(courses,"popopop")
                                 Email<span style={{ color: "red" }}>*</span>
                               </Typography>
                               <TextField
+                              required
                                 onChange={handleChangeEmail}
                                 type="email"
                                 fullWidth
@@ -486,6 +489,7 @@ console.log(courses,"popopop")
                             </Typography>
                             <FormControl fullWidth>
                               <Select
+                              required
                                 size="small"
                                 sx={{ width:{xs:"auto",lg:470}, background: "#fff" }}
                                 labelId="demo-simple-select-label"
@@ -502,14 +506,13 @@ console.log(courses,"popopop")
                                   <MenuItem
                                     onClick={() =>
                                       handleChangecourse(
-                                        val.pcode,
-                                        val.pid,
-                                        val.category_id
+                                        val.id,
+                                        val.name
                                       )
                                     }
-                                    value={val.pid}
+                                    value={val.id}
                                   >
-                                    {val.pname}
+                                    {val.name}
                                   </MenuItem>
                                 ))}
                               </Select>

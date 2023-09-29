@@ -170,6 +170,7 @@ const ApplicationFee = (props) => {
   const[enablePayFinance,setPayFinance]=useState(true)
   const[enablePay,setPay]=useState(true)
   const [checked,setChecked]=useState(false)
+  const [programName,setProgramName]=useState(false)
   const LoaderClose = () => {
     setBackopen(false);
   };
@@ -399,7 +400,8 @@ const ApplicationFee = (props) => {
         method: "post",
         url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/new-data-test.php`,
         data: {
-          type: "fetch_xlri_gmp_programs_and_batches_test",
+          type: "fetch_xlri_programs_and_batches_test",
+          category_id:localStorage.getItem("category")
         },
       }).then((response) => {
         if(response.data.status==200){
@@ -412,6 +414,7 @@ const ApplicationFee = (props) => {
             // setCourse(response.data);
             setCoursescode(response.data.programs.pcode);
             setCourses(response.data.programs.pid);
+            setProgramName(response.data.programs.pname)
           }
         }
         // console.log(response.data[0].pname,"courseee")
@@ -797,7 +800,7 @@ const ApplicationFee = (props) => {
                   sx={{ width: 480 }}
                   size="small"
                   inputProps={{ readOnly: true }}
-                  value={"Executive Program in General Management"}
+                  value={programName}
                 />
                 {/* <FormControl fullWidth>
                 <Select
@@ -1046,7 +1049,7 @@ const ApplicationFee = (props) => {
                   sx={{ width: 220 }}
                   size="small"
                   inputProps={{ readOnly: true }}
-                  value={"Executive Program in General Management"}
+                  value={programName}
                 />
               </Box>
             </Box>
@@ -1735,7 +1738,7 @@ to your transaction.
                   sx={{ width: {xs:220,lg:480} }}
                   size="small"
                   inputProps={{ readOnly: true }}
-                  value={"Executive Program in General Management"}
+                  value={programName}
                 />
                     </Box>
 

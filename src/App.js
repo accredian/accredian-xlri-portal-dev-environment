@@ -4,6 +4,7 @@ import Login from './components/Login';
 import NewLogin from './components/Login_new'
 import SignUp from './components/signUp';
 import BasicNew from './components/formSteps/BasicStep-new';
+import BasicDT from './components/formSteps-dt/stepPage';
 import CustomizedInputs from './components/formSteps/dummy';
 import {
   Routes,
@@ -39,6 +40,18 @@ function App() {
     const auth = useAuth();
     return auth ? <BasicGM /> : <Navigate to="/Login" />;
   }
+  function PrivateOutletDT() {
+    const useAuth=()=>{
+      const user=localStorage.getItem('user_id')
+      if(user){
+        return true
+      } else {
+        return false
+      }
+    }
+    const auth = useAuth();
+    return auth ? <BasicDT /> : <Navigate to="/Login" />;
+  }
   return (
     <>
     <Routes>
@@ -49,6 +62,7 @@ function App() {
     {/* <Route path='/Form' element={<Basic/>} /> */}
     <Route path='/form' element={<PrivateOutlet/>} />
     <Route path='/GMform' element={<PrivateOutletGM/>} />
+    <Route path='/DTform' element={<PrivateOutletDT/>} />
     {/* <Route path='/dummy' element={<CustomizedInputs/>} /> */}
     {/* </div> */}
     

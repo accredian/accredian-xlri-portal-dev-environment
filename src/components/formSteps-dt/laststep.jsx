@@ -71,7 +71,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     
     };
 
-const PreviewForm=(props)=>{
+const Laststep=(props)=>{
 //   console.log(props.step,"step 2")
   let navigate = useNavigate();
   const[user,setUser]=useState('');
@@ -105,8 +105,8 @@ const PreviewForm=(props)=>{
       formDatab.append("Enrollment","Yes");
     
     fetch(
-      "https://script.google.com/macros/s/AKfycbxwNZ42eYskk9eYIBXeagBI0NUG4N3DnBjyL8OiqLFKIT0UfUv8IusxWAEdvvVmpbyS/exec",
-      {
+    "https://script.google.com/macros/s/AKfycbxN2CZO8mHT9QyCH0JLHg1GxmLallIy5tJLtEnLd2lwjOiNMr3ESyT--cSJzGWwpgBuRQ/exec",
+    {
     method: "POST",
     body: formDatab
     }
@@ -116,7 +116,7 @@ const PreviewForm=(props)=>{
         method: "post",
         url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/new-data-test.php`,
         data: {
-          type: "update_last_step_status",
+          type: "update_last_step_status_test",
           user_id: parseInt(localStorage.getItem("user_id")),
         },
       }).then((res)=>{
@@ -217,19 +217,19 @@ const PreviewForm=(props)=>{
                 <Typography sx={{textAlign:"center",fontWeight:"300",fontSize:"16px",mb:3}}>
                 Your admission request has been successfully submitted.You'll receive an admission confirmation letter from XLRI within 7 working days.
                 </Typography>
-            <Box sx={{display:"flex",justifyContent:"space-between"}}>
+            <Box sx={{display:"flex",justifyContent:"center",alignItem:"center"}}>
               {/* <a
                style={{textDecoration:"none"}}
               href={`https://insaid.co//wp-content/xlriapplications/${localStorage.getItem("user_id")}.pdf`}
               download={`${localStorage.getItem("user_id")}.pdf`}
               > */}
-              <Button variant="conatained" size="small" sx={{color:"#fff",background:"#fdb714",textTransform:"none",width:150
+              {/* <Button variant="conatained" size="small" sx={{color:"#fff",background:"#fdb714",textTransform:"none",width:150
           ,"&:hover":{background:"#fdb714",color:"#fff"}}}
           onClick={()=>{getDownload(localStorage.getItem("user_id"),`${process.env.REACT_APP_BASE_URL}//wp-content/xlriapplications/XLRI_Application_${localStorage.getItem("user_id")}.pdf`)}}
-          // disabled={nxt}
+          
           >
             Download Form
-          </Button>
+          </Button> */}
               
               <Button  href="https://www.accredian.com/my-account/" target="blank"  variant="conatained" size="small" sx={{color:"#fff",background:"#fdb714",textTransform:"none",width:150
           ,"&:hover":{background:"#fdb714",color:"#fff"}}}
@@ -257,19 +257,19 @@ const PreviewForm=(props)=>{
                 <Typography sx={{textAlign:"center",fontWeight:"300",fontSize:"16px",mb:3}}>
                 Your admission request has been successfully submitted.You'll receive an admission confirmation letter from XLRI within 7 working days.
                 </Typography>
-            <Box sx={{display:"flex",justifyContent:"space-between"}}>
+            <Box sx={{display:"flex",justifyContent:"center",alignItem:"center"}}>
               {/* <a
                style={{textDecoration:"none"}}
               href={`${process.env.REACT_APP_BASE_URL}//wp-content/xlriapplications/${localStorage.getItem("user_id")}.pdf`}
               download={`${localStorage.getItem("user_id")}.pdf`}
               > */}
-              <Button variant="conatained" size="small" sx={{color:"#fff",background:"#fdb714",textTransform:"none",width:85,height:50 
+              {/* <Button variant="conatained" size="small" sx={{color:"#fff",background:"#fdb714",textTransform:"none",width:85,height:50 
           ,"&:hover":{background:"#fdb714",color:"#fff"}}}
           onClick={()=>{getDownload(localStorage.getItem("user_id"),`${process.env.REACT_APP_BASE_URL}//wp-content/xlriapplications/XLRI_Application_${localStorage.getItem("user_id")}.pdf`)}}
-          // disabled={nxt}
+          
           >
             Download Form
-          </Button>
+          </Button> */}
               
               <Button  href="https://www.accredian.com/my-account/" target="blank"  variant="conatained" size="small" sx={{color:"#fff",background:"#fdb714",textTransform:"none",width:85,height:50,ml:2,textAlign:"center"
           ,"&:hover":{background:"#fdb714",color:"#fff"}}}
@@ -291,7 +291,7 @@ const PreviewForm=(props)=>{
         </>
     )
 }
-export default PreviewForm
+export default Laststep
 
 
 // cii11621@omeie.com

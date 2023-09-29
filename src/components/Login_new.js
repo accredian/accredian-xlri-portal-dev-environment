@@ -27,7 +27,7 @@ import logo from '../images/accredainw.webp'
 var md5 = require('md5');
 
 
-export default function LoginNew() {
+export default function Login() {
     const [backopen, setBackopen] = useState(false);
   const LoaderClose = () => {
     setBackopen(false);
@@ -49,11 +49,34 @@ export default function LoginNew() {
     }
     var CryptoJS = require("crypto-js");
     let navigate = useNavigate();
-const [user,setUser]=useState({email:'',password:''})
+const [user,setUser]=useState({email:localStorage.getItem("email"),password:''})
 const handleChange=(e)=>{
     setUser({...user,[e.target.name]: e.target.value})
 }
 console.log(user)
+// function userd(){
+//   axios({
+//     method: 'post',
+//     url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
+//     data: {
+//         type: 'get_user_basic_details',
+//         user_id:localStorage.getItem("user_id")
+        
+//       }
+//   })
+//     .then(function (response) {
+//       // console.log(response.data,"user")
+//       localStorage.setItem("firstname",response.data.firstname)
+//       localStorage.setItem("lastname",response.data.lastname)
+//       if(response.data.program_id == 39){
+//         navigate('/GMform')
+//       }else{
+//         navigate('/form')
+//       }
+//     })
+
+// }
+const program_choosen=localStorage.getItem("program")
 function userd(){
   axios({
     method: 'post',
@@ -70,6 +93,7 @@ function userd(){
       localStorage.setItem("currentStepStatus", response.data.data.current_step_status);
       localStorage.setItem("firstname", response.data.data.firstname);
       localStorage.setItem("mobile", response.data.data.mobile);
+      localStorage.setItem("category",response.data.data.category)
       if(response.data.data.lastname.split(" ").length>1){
         localStorage.setItem("lastname", response.data.data.lastname.split(" ")[1]);
         localStorage.setItem("middlename", response.data.data.lastname.split(" ")[0]);
@@ -77,13 +101,57 @@ function userd(){
       else{
         localStorage.setItem("lastname", response.data.data.lastname);
       }
-      if(response.data.data.program_id == 39){
+      if(response.data.data.category == 13){
         navigate('/GMform')
-      }else{
+      }else if(response.data.data.category == 9){
         navigate('/form')
       }
+      else{
+        navigate('/DTform')
+      }
     })
+  // if(program_choosen==38){
+    
+  // }
+  // else{
+  //   axios({
+  //     method: 'post',
+  //     url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
+  //     data: {
+  //         type: 'get_user_basic_details',
+  //         user_id:localStorage.getItem("user_id")
+          
+  //       }
+  //   })
+  //     .then(function (response) {
+  //       // console.log(response.data,"user")
+  //       localStorage.setItem("firstname",response.data.firstname)
+  //       localStorage.setItem("lastname",response.data.lastname)
+  //       if(response.data.program_id == 39){
+  //         navigate('/GMform')
+  //       }else{
+  //         navigate('/form')
+  //       }
+  //       axios({
+  //         method: 'post',
+  //         url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
+  //         data: {
+  //             type: 'update_payment_status',
+  //             user_id:localStorage.getItem("user_id")
+  //           }
+  //       }).then((response)=>{
+  //         console.log(response)
+  //       })
+  //     })
+  // }
+  
 
+}
+const removeSpace=(pass)=>{
+  const originalString = pass;
+const reducedString = originalString.replace(/\s+/g, '');
+
+return reducedString; // Output: 'ABCD'
 }
 
 const submitForm=(e)=>{
@@ -93,11 +161,11 @@ const submitForm=(e)=>{
     e.preventDefault(); 
     axios({
         method: 'post',
-        url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/wpdata-new.php`,
+        url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/wpdata-test.php`,
         data: {
-            type: 'xlri_login_up',
+            type: 'xlri_login_up_test',
             username: user.email,
-            password:  user.password
+            password:  removeSpace(user.password)
           }
       })
         .then(function (response) {
@@ -109,16 +177,7 @@ const submitForm=(e)=>{
                 localStorage.setItem("email",response.data[0].email)
                 userd()
                
-                // axios({
-                //   method: 'post',
-                //   url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
-                //   data: {
-                //       type: 'update_payment_status',
-                //       user_id:localStorage.getItem("user_id")
-                //     }
-                // }).then((response)=>{
-                //   console.log(response)
-                // })
+               
               
             }
             else if (response.data[0].status==400) {
@@ -278,7 +337,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     <Box sx={{mx:2,py:5}}>
 <form  onSubmit={submitForm}>
 <Typography sx={{fontWeight:"bold",fontSize:"14px",color:"#ffffff"}}>Email<span style={{color:"red"}}>*</span></Typography>
-<TextField id="email"  size="small" type="email"  name="email"  onChange={handleChange}    fullWidth   sx={{mb:2,background:"#D9D9D9",borderRadius:"4px"}} />
+<TextField id="email"  size="small" type="email"  name="email"  onChange={handleChange} defaultValue={localStorage.getItem("email")}   fullWidth   sx={{mb:2,background:"#D9D9D9",borderRadius:"4px"}} />
 <Typography sx={{fontWeight:"bold",fontSize:"14px",color:"#ffffff"}}>Password <span style={{color:"red"}}>*</span></Typography>
 <FormControl sx={{mb:2}} fullWidth>
           {/* <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel> */}

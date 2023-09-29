@@ -307,6 +307,7 @@ const fetchEnrol=()=>{
         url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/new-data-test.php`,
         data: {
           type: "fetch_xlri_programs_and_batches_test",
+          category_id:localStorage.getItem("category")
         },
       }).then((response) => {
         // console.log(response.data[0].pname,"courseee")
@@ -993,7 +994,7 @@ to your transaction.
                   sx={{ width: {xs:220,lg:480} }}
                   size="small"
                   inputProps={{ readOnly: true }}
-                  value={"Executive Program in Product Management by XLRI"}
+                  value={course[0].name}
                 />
                     </Box>
 

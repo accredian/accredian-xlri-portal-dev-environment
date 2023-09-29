@@ -696,7 +696,7 @@ const Education = (props) => {
   
                       // options
                     }).then((res)=>{
-                      if (response.data.status == 200) {
+                      if (res.data.status == 200) {
                         props.handleNext4();
                         localStorage.setItem("currentStep", res.data.data.current_step_count);
                         localStorage.setItem("currentStepStatus", res.data.data.current_step_status);
@@ -1097,7 +1097,7 @@ const Education = (props) => {
             </Typography>
             <TextField
               inputProps={{
-                accept: "application/pdf, image/*",
+                accept: "application/pdf",
                 // onChange: handleFileChange,
               }}
               onChange={handleChangeBachelorDocuments}
@@ -1150,7 +1150,7 @@ const Education = (props) => {
           </Typography>
         </Box>
         {/* <Collapse in={openaddress} timeout="auto" unmountOnExit sx={{mb:2}}> */}
-        <Box>
+        <Box sx={{display:"flex",justifyContent:"space-between"}}>
           <Typography
             sx={{
               fontWeight: "bold",
@@ -1158,16 +1158,17 @@ const Education = (props) => {
               color: "#fff",
               mt: 2,
               mb: 1,
-              width: 150,
+              width: "30%",
+              textAlign:"left"
             }}
           >
             Are you currently working?
           </Typography>
-          <FormControl fullWidth>
+          <FormControl  fullWidth>
             {/* <InputLabel id="demo-simple-select-label">Payment Type</InputLabel> */}
             <Select
               size="small"
-              sx={{ width: 480, background: "#fff", mt: 1 }}
+              sx={{ width: 480, background: "#fff", mt: 1,ml:{xl:8} }}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={choice}
@@ -1589,7 +1590,7 @@ sx={{
                   </Typography>
                   <TextField
                     inputProps={{
-                      accept: "application/pdf, image/*",
+                      accept: "application/pdf",
                       // onChange: handleFileChange,
                     }}
                     onChange={handleChangeExperinceDocuments}
@@ -1715,7 +1716,7 @@ sx={{
             
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={country}
@@ -1738,7 +1739,7 @@ sx={{
               
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={state}
@@ -1776,7 +1777,7 @@ sx={{
               
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={city}
@@ -1800,7 +1801,7 @@ sx={{
                          value={pincode}
                          type="number"
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1827,7 +1828,7 @@ sx={{
                           onChange={handleChangeAddress}
                           value={address}
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1845,7 +1846,7 @@ sx={{
                           onChange={handleChangeAddresst}
                           value={addresstwo}
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1893,7 +1894,7 @@ sx={{
                   {/* <InputLabel id="demo-simple-select-label">Payment Type</InputLabel> */}
                   <Select
                     size="small"
-                    sx={{ width:220, background: "#fff" }}
+                    sx={{ width:280, background: "#fff" }}
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     //  value={bachelorDegree}
@@ -1930,7 +1931,7 @@ sx={{
               {/* <InputLabel id="demo-simple-select-label">Payment Type</InputLabel> */}
               <Select
                 size="small"
-                sx={{ width: 220, background: "#fff" }}
+                sx={{ width: 280, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 //  value={bachelorDegree}
@@ -1961,7 +1962,7 @@ sx={{
                          placeholder="Enter Bachelor's Degree Name"
                     onChange={handleChangeDegreeOther}
                     value={bachelorDegreeOther}
-                      sx={{ width: 220 }}
+                      sx={{ width: 280 }}
                     size="small"
                     //  onKeyPress={(e) => {
                     //     if (new RegExp(/[a-zA-Z]/).test(e.key)) {
@@ -1985,7 +1986,7 @@ sx={{
             <TextField
               onChange={handleChangeCollegeName}
               value={collegeName}
-              sx={{ width: 220,background:"#fff",borderRadius:"5px" }}
+              sx={{ width: 280,background:"#fff",borderRadius:"5px" }}
               size="small"
               error={error}
         // onKeyPress={handleKeyPress}
@@ -2014,7 +2015,7 @@ sx={{
             </Typography>
             <BootstrapInput
               type="number"
-              sx={{ width: 220 }}
+              sx={{ width: 280 }}
               size="small"
               onChange={handleChangeYear}
               value={yearOfCompletion}
@@ -2028,7 +2029,7 @@ sx={{
             </Typography>
             <BootstrapInput
               type="number"
-              sx={{ width: 220 }}
+              sx={{ width: 280 }}
               size="small"
               onChange={handleChangeCgpa}
               value={cgpa}
@@ -2052,12 +2053,12 @@ sx={{
             </Typography>
             <TextField
               inputProps={{
-                accept: "application/pdf, image/*",
+                accept: "application/pdf",
                 // onChange: handleFileChange,
               }}
               onChange={handleChangeBachelorDocuments}
               size="small"
-              sx={{ width: 220, background: "#fff", borderRadius: "4px" }}
+              sx={{ width: 280, background: "#fff", borderRadius: "4px" }}
               fullWidth
               type="file"
             ></TextField>
@@ -2075,7 +2076,7 @@ sx={{
               }}
               onChange={handleChangeImage}
               size="small"
-              sx={{ width:{xs:220,lg:480}, background: "#fff", borderRadius: "4px" }}
+              sx={{ width:{xs:280,lg:480}, background: "#fff", borderRadius: "4px" }}
               fullWidth
               type="file"
             ></TextField>
@@ -2107,7 +2108,7 @@ sx={{
               color: "#fff",
               mt: 2,
               mb: 1,
-              width: 150,
+              width: 250,
             }}
           >
             Are you currently working?
@@ -2116,7 +2117,7 @@ sx={{
             {/* <InputLabel id="demo-simple-select-label">Payment Type</InputLabel> */}
             <Select
               size="small"
-              sx={{ width: 220, background: "#fff", mt: 1 }}
+              sx={{ width: 280, background: "#fff", mt: 1 }}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={choice}
@@ -2161,7 +2162,7 @@ sx={{
     onChange={handleChangeTotalExp}
     value={Total_exp}
     sx={{
-      width:220,
+      width:280,
       background: "#fff",
       borderRadius: "5px",
     }}
@@ -2180,7 +2181,7 @@ sx={{
               {/* <InputLabel id="demo-simple-select-label">Payment Type</InputLabel> */}
               <Select
                 size="small"
-                sx={{ width: 220, background: "#fff" }}
+                sx={{ width: 280, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                  value={industry}
@@ -2212,7 +2213,7 @@ sx={{
             {industry=="others"?(
                       <Box sx={{mt:1}}>
                          <BootstrapInput
-                         sx={{width:220}}
+                         sx={{width:280}}
                       placeholder="Enter Your Previous Industry"
                     onChange={handleChangeIndustryOther}
                     value={industryOther}
@@ -2244,7 +2245,7 @@ sx={{
                   <TextField
               onChange={handleChangeCpmanyName}
               value={companyname}
-              sx={{ width: 220,background:"#fff",borderRadius:"5px" }}
+              sx={{ width: 280,background:"#fff",borderRadius:"5px" }}
               size="small"
               error={validCmpname}
         // onKeyPress={handleKeyPress}
@@ -2257,7 +2258,7 @@ sx={{
                   {/* <BootstrapInput
                     onChange={handleChangeCpmanyName}
                     value={companyname}
-                    sx={{ width: 220 }}
+                    sx={{ width: 280 }}
                     size="small"
                     // onKeyPress={(e) => {
                     //   if (new RegExp(/[a-zA-Z]/).test(e.key)) {
@@ -2279,7 +2280,7 @@ sx={{
   <BootstrapInput
     onChange={handleChangeDesignation}
     value={designation}
-    sx={{ width:220}}
+    sx={{ width:280}}
     size="small"
     // onKeyPress={(e) => {
     //   if (new RegExp(/[a-zA-Z]/).test(e.key)) {
@@ -2312,7 +2313,7 @@ sx={{
                     }}
                     onChange={handleChangeCompanyemail}
                     value={companyemail}
-                    sx={{ width: 220, background: "#fff", borderRadius: "5px" }}
+                    sx={{ width: 280, background: "#fff", borderRadius: "5px" }}
                     size="small"
                   />
                 </Box>
@@ -2392,7 +2393,7 @@ sx={{
     onChange={handleChangeTotalExp}
     value={Total_exp}
     sx={{
-      width:220,
+      width:280,
       background: "#fff",
       borderRadius: "5px",
     }}
@@ -2409,7 +2410,7 @@ sx={{
               {/* <InputLabel id="demo-simple-select-label">Payment Type</InputLabel> */}
               <Select
                 size="small"
-                sx={{ width: 220, background: "#fff" }}
+                sx={{ width: 280, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                  value={previndustry}
@@ -2441,7 +2442,7 @@ sx={{
             {previndustry=="others"?(
                       <Box sx={{mt:1}}>
                          <BootstrapInput
-                         sx={{width:220}}
+                         sx={{width:280}}
                       placeholder="Enter Your Previous Industry"
                     onChange={handleChangePrevIndustryOther}
                     value={previndustryOther}
@@ -2475,7 +2476,7 @@ sx={{
                   <BootstrapInput
                     onChange={handleChangePreviousCompany}
                     value={previuosCompany}
-                    sx={{ width: 220 }}
+                    sx={{ width: 280 }}
                     size="small"
                     // onKeyPress={(e) => {
                     //   if (new RegExp(/[a-zA-Z]/).test(e.key)) {
@@ -2496,12 +2497,12 @@ sx={{
                   </Typography>
                   <TextField
                     inputProps={{
-                      accept: "application/pdf, image/*",
+                      accept: "application/pdf",
                       // onChange: handleFileChange,
                     }}
                     onChange={handleChangeExperinceDocuments}
                     size="small"
-                    sx={{ width: 220, background: "#fff", borderRadius: "4px" }}
+                    sx={{ width: 280, background: "#fff", borderRadius: "4px" }}
                     fullWidth
                     type="file"
                   ></TextField>
