@@ -38,7 +38,6 @@ import { SettingsEthernetOutlined } from "@mui/icons-material";
 import logo from '../../images/accredian-logo.png'
 import FormGroup from '@mui/material/FormGroup';
 import icon from '../../images/icon.png'
-import LogRocket from 'logrocket';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "label + &": {
@@ -89,7 +88,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "light" ? "#fdb714" : "#fdb714",
   },
 }));
-const AdmissionNew = (props) => {
+const AdmissionfeeNew = (props) => {
   let navigate = useNavigate();
   const [user, setUser] = useState("");
   useEffect(() => {
@@ -240,10 +239,15 @@ const AdmissionNew = (props) => {
       if(res.data.status==200){
         setpaymentChange(true)
         setShow(false)
+        setChecked(false)
         localStorage.setItem("currentStep", res.data.data.current_step_count);
         localStorage.setItem("currentStepStatus", res.data.data.current_step_status);
       }
     })
+    // setpaymentChange(true)
+    // setShow(false)
+    // localStorage.setItem("currentStep", 'UXxd22qvQ9kHfw0FjJnXaQ==');
+    // localStorage.setItem("currentStepStatus", "pending");
   }
   const handleClick = () => {
     LoaderOpen();
@@ -285,9 +289,9 @@ console.log(enrol,"enroll")
 const fetchEnrol=()=>{
   axios({
     method: "post",
-    url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data-test.php`,
+    url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data.php`,
     data: {
-      type: "enrolment_details_test",
+      type: "enrolment_details",
       user_id:parseInt(localStorage.getItem("user_id"))
     },
   }).then((response) => {
@@ -470,7 +474,7 @@ const fetchEnrol=()=>{
       {localStorage.getItem("currentStepStatus") == "pending" || paymentChanges  ? (
         <Box>
           {!show ? (
-            <Box sx={{  display: {xs:"",lg:"flex"},ml:{xs:0,lg:13} }}>
+            <Box sx={{  display: {xs:"",lg:"flex"} }}>
               <Typography
                 sx={{
                   fontWeight: "bold",
@@ -478,7 +482,9 @@ const fetchEnrol=()=>{
                   color: "#fff",
                   mt: 2,
                   mb: 1,
-                  width: 150,
+                  // width: 150,
+                  width: {lg:330,xl:520},
+                  textAlign:"center"
                 }}
               >
                 Payment Type
@@ -487,7 +493,7 @@ const fetchEnrol=()=>{
                 {/* <InputLabel id="demo-simple-select-label">Payment Type</InputLabel> */}
                 <Select
                   size="small"
-                  sx={{ width: {xs:220,lg:480}, background: "#fff", mt: 1 }}
+                  sx={{ width: {xs:280,lg:480}, background: "#fff", mt: 1 }}
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={payment}
@@ -618,7 +624,7 @@ const fetchEnrol=()=>{
                     </Button>
                 </Box>
           </Box> */}
-           <Box sx={{background:"#fff",borderRadius:"8px",border:"1px solid #fdb714",px:1,pb:1.5,width:350}}>
+           <Box sx={{background:"#fff",borderRadius:"8px",border:"1px solid #fdb714",px:1,pb:1.5,width:460}}>
      <Box sx={{textAlign:"center",my:1,}}>
      <img src={icon} alt="logo"  /> 
 </Box>
@@ -682,7 +688,7 @@ to your transaction.
             
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={country}
@@ -705,7 +711,7 @@ to your transaction.
               
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={state}
@@ -743,7 +749,7 @@ to your transaction.
               
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={city}
@@ -767,7 +773,7 @@ to your transaction.
                          value={pincode}
                          type="number"
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -794,7 +800,7 @@ to your transaction.
                           onChange={handleChangeAddress}
                           value={address}
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -812,7 +818,7 @@ to your transaction.
                           onChange={handleChangeAddresst}
                           value={addresstwo}
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -866,7 +872,7 @@ to your transaction.
                         First Name <span style={{ color: "red" }}>*</span>{" "}
                       </Typography>
                       <BootstrapInput
-                        sx={{ width: {xs:220,lg:480} }}
+                        sx={{ width: {xs:280,lg:480} }}
                         size="small"
                         inputProps={{ readOnly: true }}
                         value={localStorage.getItem("firstname")}
@@ -883,7 +889,7 @@ to your transaction.
                         Middle Name 
                       </Typography>
                       <BootstrapInput
-                        sx={{ width: {xs:220,lg:480} }}
+                        sx={{ width: {xs:280,lg:480} }}
                         size="small"
                         inputProps={{ readOnly: true }}
                         value={localStorage.getItem("middlename")}
@@ -910,7 +916,7 @@ to your transaction.
                         Last Name <span style={{ color: "red" }}>*</span>{" "}
                       </Typography>
                       <BootstrapInput
-                        sx={{ width: {xs:220,lg:480} }}
+                        sx={{ width: {xs:280,lg:480} }}
                         size="small"
                         inputProps={{ readOnly: true }}
                         value={localStorage.getItem("lastname")}
@@ -928,7 +934,7 @@ to your transaction.
                       </Typography>
                       <BootstrapInput
                         type="number"
-                        sx={{ width: {xs:220,lg:480} }}
+                        sx={{ width: {xs:280,lg:480} }}
                         size="small"
                         inputProps={{ readOnly: true }}
                         value={localStorage.getItem("mobile")}
@@ -956,7 +962,7 @@ to your transaction.
                       </Typography>
                       <BootstrapInput
                         type="email"
-                        sx={{ width: {xs:220,lg:480} }}
+                        sx={{ width: {xs:280,lg:480} }}
                         size="small"
                         inputProps={{ readOnly: true }}
                         value={localStorage.getItem("email")}
@@ -976,7 +982,7 @@ to your transaction.
                        
                         <Select
                           size="small"
-                          sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                          sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                           labelId="demo-simple-select-label"
                           id="demo-simple-select"
                           // value={country}
@@ -991,7 +997,7 @@ to your transaction.
                       </FormControl> */}
                       <BootstrapInput
                   type="text"
-                  sx={{ width: {xs:220,lg:480} }}
+                  sx={{ width: {xs:280,lg:480} }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={course[0].name}
@@ -1022,7 +1028,7 @@ to your transaction.
                       type="number"
                         onChange={paymentChange}
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1043,7 +1049,7 @@ to your transaction.
                        
                         <Select
                           size="small"
-                          sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                          sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                           labelId="demo-simple-select-label"
                           id="demo-simple-select"
                           // value={country}
@@ -1058,7 +1064,7 @@ to your transaction.
                       </FormControl> */}
                       <BootstrapInput
                   type="text"
-                  sx={{ width: {xs:220,lg:480} }}
+                  sx={{ width: {xs:280,lg:480} }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={batch[0].name}
@@ -1101,7 +1107,7 @@ to your transaction.
               
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={country}
@@ -1124,7 +1130,7 @@ to your transaction.
               
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={state}
@@ -1162,7 +1168,7 @@ to your transaction.
               
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={city}
@@ -1186,7 +1192,7 @@ to your transaction.
                          value={pincode}
                          type="number"
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1214,7 +1220,7 @@ to your transaction.
                           value={address}
                         
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1232,7 +1238,7 @@ to your transaction.
                            onChange={handleChangeAddresst}
                            value={addresstwo}
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1346,4 +1352,4 @@ to your transaction.
     </>
   );
 };
-export default AdmissionNew;
+export default AdmissionfeeNew;

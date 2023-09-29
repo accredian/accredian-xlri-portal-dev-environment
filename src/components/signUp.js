@@ -485,7 +485,7 @@ export default function SignUp() {
                                 color: "#ffffff",
                               }}
                             >
-                              Program <span style={{ color: "red" }}>*</span>
+                              Vertical <span style={{ color: "red" }}>*</span>
                             </Typography>
                             <FormControl fullWidth>
                               <Select
@@ -500,7 +500,7 @@ export default function SignUp() {
                                 // onChange={handleChangeCountry}
                               >
                                    <MenuItem value="program">
-            <em>Select program</em>
+            <em>Select Vertical</em>
           </MenuItem>
                                 {course.map((val, i) => (
                                   <MenuItem

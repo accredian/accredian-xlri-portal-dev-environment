@@ -105,7 +105,7 @@ const Laststep=(props)=>{
       formDatab.append("Enrollment","Yes");
     
     fetch(
-    "https://script.google.com/macros/s/AKfycbxN2CZO8mHT9QyCH0JLHg1GxmLallIy5tJLtEnLd2lwjOiNMr3ESyT--cSJzGWwpgBuRQ/exec",
+    "https://script.google.com/macros/s/AKfycbwgP4IeWrbw-vHriA14ZrDMQCiQZrm7vi0voLounBWmxt6FjU1yv5a-YftLvyLVNIbaNw/exec",
     {
     method: "POST",
     body: formDatab
@@ -140,10 +140,11 @@ const Laststep=(props)=>{
       if(localStorage.getItem("currentStepStatus")=="pending"){
         axios({
                           method: "post",
-                          url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/data-test.php`,
+                          url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/new-data-test.php`,
                           data: {
                             type: "fetch_xlri_sheet_data_test",
                             user_id: parseInt(localStorage.getItem("user_id")),
+                            category_id:localStorage.getItem("category")
                           },
                         }).then((res)=>{
                          if(res.data[0].status==200){

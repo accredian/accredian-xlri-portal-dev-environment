@@ -44,7 +44,7 @@ import "react-toastify/dist/ReactToastify.css";
 // import FormControlLabel from '@mui/material/FormControlLabel';
 // import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import BlinkingTextField from '../blinking'
+
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 // import { chromeTabsStylesHook } from '@mui-treasury/styles/tabs';
 // import { tabsStyles,tabItemStyles } from "./style";
@@ -200,10 +200,13 @@ const PaymentNew = (props) => {
       if(res.data.status==200){
         setpaymentChange(true)
         setShow(false)
+        setChecked(false)
         localStorage.setItem("currentStep", res.data.data.current_step_count);
         localStorage.setItem("currentStepStatus", res.data.data.current_step_status);
       }
     })
+   
+    
   }
   const LoaderOpen = () => {
     setBackopen(true);
@@ -527,7 +530,7 @@ const PaymentNew = (props) => {
   // console.log(course[0].pcode,"check")
   const checkoutHandler = async (amount) => {
     const options = {
-      
+      // key: "rzp_live_kuHNpOKPMVihkI",
       key:process.env.REACT_APP_RAZORPAY_KEY,
       amount: amount * 100,
       currency: "INR",
@@ -559,19 +562,19 @@ const PaymentNew = (props) => {
   };
 
   console.log(value, "seee");
-  const blinkingStyle = {
-    animation: 'blink 1s infinite',
-    '@keyframes blink': {
-      '0%, 100%': {
-        opacity: 1,
-        transform: 'scale(1)',
-      },
-      '50%': {
-        opacity: 0.5,
-        transform: 'scale(1.1)',
-      },
-    },
-  };
+  // const blinkingStyle = {
+  //   animation: 'blink 1s infinite',
+  //   '@keyframes blink': {
+  //     '0%, 100%': {
+  //       opacity: 1,
+  //       transform: 'scale(1)',
+  //     },
+  //     '50%': {
+  //       opacity: 0.5,
+  //       transform: 'scale(1.1)',
+  //     },
+  //   },
+  // };
 
   return (
     <>
@@ -942,7 +945,7 @@ const PaymentNew = (props) => {
                   First Name
                 </Typography>
                 <BootstrapInput
-                  sx={{ width: 220 }}
+                  sx={{ width: 280 }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={localStorage.getItem("firstname")}
@@ -955,7 +958,7 @@ const PaymentNew = (props) => {
                   Middle Name
                 </Typography>
                 <BootstrapInput
-                  sx={{ width: 220 }}
+                  sx={{ width: 280 }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={localStorage.getItem("middlename")}
@@ -977,7 +980,7 @@ const PaymentNew = (props) => {
                   Last Name
                 </Typography>
                 <BootstrapInput
-                  sx={{ width: 220 }}
+                  sx={{ width: 280 }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={localStorage.getItem("lastname")}
@@ -991,7 +994,7 @@ const PaymentNew = (props) => {
                 </Typography>
                 <BootstrapInput
                   type="number"
-                  sx={{ width: 220 }}
+                  sx={{ width: 280 }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={localStorage.getItem("mobile")}
@@ -1014,7 +1017,7 @@ const PaymentNew = (props) => {
                 </Typography>
                 <BootstrapInput
                   type="email"
-                  sx={{ width: 220 }}
+                  sx={{ width: 280 }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={localStorage.getItem("email")}
@@ -1029,7 +1032,7 @@ const PaymentNew = (props) => {
                 {/* <FormControl fullWidth>
                 <Select
                   size="small"
-                  sx={{ width: 220, background: "#fff" }}
+                  sx={{ width: 280, background: "#fff" }}
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   // value={country}
@@ -1044,7 +1047,7 @@ const PaymentNew = (props) => {
               </FormControl> */}
                 <BootstrapInput
                   type="email"
-                  sx={{ width: 220 }}
+                  sx={{ width: 280 }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={programName}
@@ -1066,7 +1069,7 @@ const PaymentNew = (props) => {
                   Application Fee
                 </Typography>
                 <BootstrapInput
-                  sx={{ width: 220 }}
+                  sx={{ width: 280 }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   defaultValue="INR10,000"
@@ -1080,7 +1083,7 @@ const PaymentNew = (props) => {
                 </Typography>
                 <BootstrapInput
                   type="email"
-                  sx={{ width: 220 }}
+                  sx={{ width: 280 }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={batchtext}
@@ -1213,7 +1216,7 @@ const PaymentNew = (props) => {
       {localStorage.getItem("currentStepStatus") == "pending" || paymentChanges  ? (
         <Box>
           {!show ? (
-            <Box sx={{  display: {xs:"",lg:"flex"},ml:{xs:0,lg:13} }}>
+            <Box sx={{  display: {xs:"",lg:"flex"} }}>
               <Typography
                 sx={{
                   fontWeight: "bold",
@@ -1221,7 +1224,9 @@ const PaymentNew = (props) => {
                   color: "#fff",
                   mt: 2,
                   mb: 1,
-                  width: 150,
+                  // width: 150,
+                  width: {lg:330,xl:520},
+                  textAlign:"center"
                 }}
               >
                 Payment Type
@@ -1230,7 +1235,7 @@ const PaymentNew = (props) => {
                 {/* <InputLabel id="demo-simple-select-label">Payment Type</InputLabel> */}
                 <Select
                   size="small"
-                  sx={{ width: {xs:220,lg:480}, background: "#fff", mt: 1 }}
+                  sx={{ width: {xs:280,lg:480}, background: "#fff", mt: 1 }}
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={payment}
@@ -1361,7 +1366,7 @@ const PaymentNew = (props) => {
                     </Button>
                 </Box>
           </Box> */}
-           <Box sx={{background:"#fff",borderRadius:"8px",border:"1px solid #fdb714",px:1,pb:1.5,width:350}}>
+           <Box sx={{background:"#fff",borderRadius:"8px",border:"1px solid #fdb714",px:1,pb:1.5,width:460}}>
      <Box sx={{textAlign:"center",my:1,}}>
      <img src={icon} alt="logo"  /> 
 </Box>
@@ -1424,7 +1429,7 @@ to your transaction.
             
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={country}
@@ -1447,7 +1452,7 @@ to your transaction.
               
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={state}
@@ -1485,7 +1490,7 @@ to your transaction.
               
               <Select
                 size="small"
-                sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={city}
@@ -1509,7 +1514,7 @@ to your transaction.
                          value={pincode}
                          type="number"
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1536,7 +1541,7 @@ to your transaction.
                           onChange={handleChangeAddress}
                           value={address}
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1554,7 +1559,7 @@ to your transaction.
                           onChange={handleChangeAddresst}
                           value={addresstwo}
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1608,7 +1613,7 @@ to your transaction.
                         First Name <span style={{ color: "red" }}>*</span>{" "}
                       </Typography>
                       <BootstrapInput
-                        sx={{ width: {xs:220,lg:480} }}
+                        sx={{ width: {xs:280,lg:480} }}
                         size="small"
                         inputProps={{ readOnly: true }}
                         value={localStorage.getItem("firstname")}
@@ -1625,7 +1630,7 @@ to your transaction.
                         Middle Name 
                       </Typography>
                       <BootstrapInput
-                        sx={{ width: {xs:220,lg:480} }}
+                        sx={{ width: {xs:280,lg:480} }}
                         size="small"
                         inputProps={{ readOnly: true }}
                         value={localStorage.getItem("middlename")}
@@ -1652,7 +1657,7 @@ to your transaction.
                         Last Name <span style={{ color: "red" }}>*</span>{" "}
                       </Typography>
                       <BootstrapInput
-                        sx={{ width: {xs:220,lg:480} }}
+                        sx={{ width: {xs:280,lg:480} }}
                         size="small"
                         inputProps={{ readOnly: true }}
                         value={localStorage.getItem("lastname")}
@@ -1670,7 +1675,7 @@ to your transaction.
                       </Typography>
                       <BootstrapInput
                         type="number"
-                        sx={{ width: {xs:220,lg:480} }}
+                        sx={{ width: {xs:280,lg:480} }}
                         size="small"
                         inputProps={{ readOnly: true }}
                         value={localStorage.getItem("mobile")}
@@ -1698,7 +1703,7 @@ to your transaction.
                       </Typography>
                       <BootstrapInput
                         type="email"
-                        sx={{ width: {xs:220,lg:480} }}
+                        sx={{ width: {xs:280,lg:480} }}
                         size="small"
                         inputProps={{ readOnly: true }}
                         value={localStorage.getItem("email")}
@@ -1718,7 +1723,7 @@ to your transaction.
                        
                         <Select
                           size="small"
-                          sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                          sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                           labelId="demo-simple-select-label"
                           id="demo-simple-select"
                           // value={country}
@@ -1733,7 +1738,7 @@ to your transaction.
                       </FormControl> */}
                       <BootstrapInput
                   type="text"
-                  sx={{ width: {xs:220,lg:480} }}
+                  sx={{ width: {xs:280,lg:480} }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={programName}
@@ -1765,7 +1770,7 @@ to your transaction.
                       value={addmissionPayment}
                       onChange={paymentChangefull}
                         sx={{
-                          width: {xs:220,lg:480},
+                          width: {xs:280,lg:480},
                           background: "#fff",
                           borderRadius: "5px",
                         }}
@@ -1786,7 +1791,7 @@ to your transaction.
                        
                         <Select
                           size="small"
-                          sx={{ width: {xs:220,lg:480}, background: "#fff" }}
+                          sx={{ width: {xs:280,lg:480}, background: "#fff" }}
                           labelId="demo-simple-select-label"
                           id="demo-simple-select"
                           // value={country}
@@ -1801,7 +1806,7 @@ to your transaction.
                       </FormControl> */}
                       <BootstrapInput
                   type="text"
-                  sx={{ width: {xs:220,lg:480} }}
+                  sx={{ width: {xs:280,lg:480} }}
                   size="small"
                   inputProps={{ readOnly: true }}
                   value={batchtext}

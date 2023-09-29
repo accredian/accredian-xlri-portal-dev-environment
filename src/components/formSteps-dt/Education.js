@@ -692,6 +692,7 @@ const Education = (props) => {
                       url: `${process.env.REACT_APP_BASE_URL}/generate-xlri-applications-test.php`,
                       data: {
                         user_id: localStorage.getItem("user_id"),
+                        category_id:localStorage.getItem("category"),
                       },
   
                       // options
