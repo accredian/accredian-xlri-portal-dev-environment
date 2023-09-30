@@ -47,7 +47,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "light" ? "#fcfcfb" : "#2b2b2b",
     border: "1px solid #ced4da",
     fontSize: 16,
-    width:{xs:280,lg:480},
+    width:{xs:230,lg:480},
     height: 19,
     padding: "10px 12px",
     transition: theme.transitions.create([
@@ -76,6 +76,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 const PersonalGM = (props) => {
+  const today = new Date().toISOString().split('T')[0];
   const [openPersonal, setOpenPersonal] = useState(false);
   const [openADD, setOpenADD] = useState(false);
   const [openaddress, setOpenaddress] = useState(false);
@@ -545,9 +546,9 @@ const PersonalGM = (props) => {
   //  backgroundColor: "rgba(255, 255, 255, .15)",
   return (
     <>
-      <Box sx={{}}>
+      <Box sx={{display: { xs: "none", lg: "block"}}}>
         <Box
-          sx={{ mb: 1, p:{xs:0,lg:1}, borderRadius: "5px" }}
+          sx={{ mb: 1, p: 1, borderRadius: "5px" }}
           onClick={handleClickPersonal}
         >
           {/* {openPersonal ? <ExpandLess sx={{color:"#fff"}} /> : <ExpandMore sx={{color:"#fff"}} />} */}
@@ -565,7 +566,7 @@ const PersonalGM = (props) => {
         
         <Box
           sx={{
-            display: {xs:"",lg:"flex"},
+            display: "flex",
             justifyContent: "space-between",
             mt: 1,
             mb: 1,
@@ -580,7 +581,7 @@ const PersonalGM = (props) => {
             <BootstrapInput
               onChange={handleChangeName}
               value={name}
-              sx={{ width:{xs:280,lg:480}, }}
+              sx={{ width: 480 }}
               size="small"
               helperText={name ? "" : "This filed is required"}
               onKeyPress={(e) => {
@@ -599,7 +600,7 @@ const PersonalGM = (props) => {
             <BootstrapInput
               onChange={handleChangeMiddle}
               value={middleName}
-              sx={{ width:{xs:280,lg:480}, }}
+              sx={{ width: 480 }}
               size="small"
               helperText={name ? "" : "This filed is required"}
               onKeyPress={(e) => {
@@ -613,7 +614,7 @@ const PersonalGM = (props) => {
         </Box>
         <Box
           sx={{
-            display: {xs:"",lg:"flex"},
+            display: "flex",
             justifyContent: "space-between",
             mt: 1,
             mb: 1,
@@ -628,7 +629,7 @@ const PersonalGM = (props) => {
             <BootstrapInput
               onChange={handleChangelast}
               value={lastName}
-              sx={{ width:{xs:280,lg:480}, }}
+              sx={{ width: 480 }}
               size="small"
               helperText={name ? "" : "This filed is required"}
               onKeyPress={(e) => {
@@ -646,7 +647,7 @@ const PersonalGM = (props) => {
             </Typography>
             <TextField
               type="email"
-              sx={{ width:{xs:280,lg:480}, background: "#d9d9d9", borderRadius: "5px" }}
+              sx={{ width: 480, background: "#d9d9d9", borderRadius: "5px" }}
               size="small"
               value={email}
               inputProps={{ readOnly: true }}
@@ -658,7 +659,7 @@ const PersonalGM = (props) => {
 
         <Box
           sx={{
-            display: {xs:"",lg:"flex"},
+            display: "flex",
             justifyContent: "space-between",
             mt: 1,
             mb: 3,
@@ -672,6 +673,7 @@ const PersonalGM = (props) => {
             </Typography>
             {/* <TextField
               type="number"
+              
               error={!isPhoneNumberValid}
         helperText={!isPhoneNumberValid ? 'Invalid phone number format' : ''}
         InputProps={{
@@ -681,14 +683,15 @@ const PersonalGM = (props) => {
             </InputAdornment>
           ),
         }}
-              sx={{ width:{xs:280,lg:480},background:"#fff",borderRadius:"5px" }}
+              
+              sx={{ width: 480,background:"#fff",borderRadius:"5px" }}
               size="small"
               value={number}
               onChange={handleChangeNumber}
             /> */}
-             <PhoneInput
+            <PhoneInput
             label=""
-         
+            // inputClass="btttt"
           country={'in'}
          size="small"
         
@@ -708,7 +711,7 @@ const PersonalGM = (props) => {
               {/* <InputLabel id="demo-simple-select-label">Gender</InputLabel> */}
               <Select
                 size="small"
-                sx={{ width:{xs:280,lg:480}, background: "#fff" }}
+                sx={{ width: 480, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={gender}
@@ -726,7 +729,7 @@ const PersonalGM = (props) => {
         </Box>
         <Box
         sx={{
-          display: {xs:"",lg:"flex"},
+          display: "flex",
           justifyContent: "space-between",
           mt: 1,
           mb: 3,
@@ -740,8 +743,9 @@ const PersonalGM = (props) => {
             </Typography>
             <BootstrapInput
               type="date"
-              sx={{ width:{xs:280,lg:480}, }}
+              sx={{ width: 480 }}
               value={dob}
+              inputProps={{ max: today }}
               size="small"
               onChange={handleChangeDob}
             />
@@ -769,7 +773,224 @@ const PersonalGM = (props) => {
 
       {/* mobile version */}
 
+      <Box sx={{display: { xs: "block", lg: "none"}}}>
+        <Box
+          sx={{ mb: 1, p: 1, borderRadius: "5px" }}
+          onClick={handleClickPersonal}
+        >
+          {/* {openPersonal ? <ExpandLess sx={{color:"#fff"}} /> : <ExpandMore sx={{color:"#fff"}} />} */}
+          <Typography
+            sx={{
+              color: "#fff",
+              fontWeight: "bold",
+              textAlign: "center",
+              fontSize: "23px",
+            }}
+          >
+            Personal Details
+          </Typography>
+        </Box>
+        
+        <Box
+          sx={{
+            // display: "flex",
+            // justifyContent: "space-between",
+            mt: 1,
+            mb: 1,
+          }}
+        >
+          <Box>
+            <Typography
+              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+            >
+              First Name <span style={{ color: "red" }}>*</span>
+            </Typography>
+            <BootstrapInput
+              onChange={handleChangeName}
+              value={name}
+              sx={{ width: 280 }}
+              size="small"
+              helperText={name ? "" : "This filed is required"}
+              onKeyPress={(e) => {
+                if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+                } else e.preventDefault();
+              }}
+            />
+            {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
+          </Box>
+          <Box>
+            <Typography
+              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+            >
+              Middle Name
+            </Typography>
+            <BootstrapInput
+              onChange={handleChangeMiddle}
+              value={middleName}
+              sx={{ width: 280 }}
+              size="small"
+              helperText={name ? "" : "This filed is required"}
+              onKeyPress={(e) => {
+                if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+                } else e.preventDefault();
+              }}
+            />
+            {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
+          </Box>
+          
+        </Box>
+        <Box
+          sx={{
+          
+            mt: 1,
+            mb: 1,
+          }}
+        >
+          <Box>
+            <Typography
+              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+            >
+              Last Name <span style={{ color: "red" }}>*</span>
+            </Typography>
+            <BootstrapInput
+              onChange={handleChangelast}
+              value={lastName}
+              sx={{ width: 280 }}
+              size="small"
+              helperText={name ? "" : "This filed is required"}
+              onKeyPress={(e) => {
+                if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+                } else e.preventDefault();
+              }}
+            />
+            {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
+          </Box>
+          <Box>
+            <Typography
+              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+            >
+              Email ID <span style={{ color: "red" }}>*</span>
+            </Typography>
+            <TextField
+              type="email"
+              sx={{ width: 280, background: "#d9d9d9", borderRadius: "5px" }}
+              size="small"
+              value={email}
+              inputProps={{ readOnly: true }}
+              onChange={handleChangeEmail}
+            />
+          </Box>
+         
+        </Box>
 
+        <Box
+          sx={{
+            
+            mt: 1,
+            mb: 1,
+          }}
+        >
+           <Box>
+            <Typography
+              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+            >
+              Phone Number <span style={{ color: "red" }}>*</span>
+            </Typography>
+            {/* <TextField
+              type="number"
+             
+              error={!isPhoneNumberValid}
+        helperText={!isPhoneNumberValid ? 'Invalid phone number format' : ''}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <PhoneIcon color={!isPhoneNumberValid ? 'error' : 'action'} />
+            </InputAdornment>
+          ),
+        }}
+              sx={{ width: 280,background:"#fff",borderRadius:"5px" }}
+              size="small"
+              value={number}
+              onChange={handleChangeNumber}
+            /> */}
+             <PhoneInput
+          
+          country={'in'}
+         size="small"
+        
+  placeholder="Enter phone number"
+  value={number}
+  onChange={setnumber}
+ 
+  />
+          </Box>
+          <Box>
+            <Typography
+              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+            >
+              Gender <span style={{ color: "red" }}>*</span>
+            </Typography>
+            <FormControl fullWidth>
+              {/* <InputLabel id="demo-simple-select-label">Gender</InputLabel> */}
+              <Select
+                size="small"
+                sx={{ width: 280, background: "#fff" }}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={gender}
+                label="Gender"
+                onChange={handleChangeGender}
+              >
+                <MenuItem value={"Male"}>Male</MenuItem>
+                <MenuItem value={"Female"}>Female</MenuItem>
+                <MenuItem value={"Others"}>Others</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+
+          
+        </Box>
+        <Box 
+        sx={{
+            
+          mt: 1,
+          mb: 3,
+        }}
+        >
+        <Box>
+            <Typography
+              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+            >
+              Date of Birth <span style={{ color: "red" }}>*</span>
+            </Typography>
+            <BootstrapInput
+              type="date"
+              sx={{ width: 280 }}
+              value={dob}
+              size="small"
+              inputProps={{ max: today }}
+              onChange={handleChangeDob}
+            />
+          </Box>
+        </Box>
+
+        
+        <Box sx={{ display: "flex", justifyContent: "end", mt: 1 }}>
+          <Button
+            variant="conatained"
+            size="small"
+            sx={{
+              color: "#fff",
+              background: "#fdb714",
+              "&:hover": { background: "#fdb714", color: "#fff" },
+            }}
+            onClick={handleNext}
+            disabled={nxt}
+          >
+            Submit
+          </Button>
+        </Box>
+      </Box>
 
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}

@@ -485,9 +485,10 @@ const BasicNew = () => {
             backgroundColor: "rgba(255, 255, 255, .30)",
             backdropFilter: "blur(5px)",
             border: "1px solid #fdb714",
-            p: 3,
+            py:{xs:3,lg:3},
+           px:{xs:1,lg:3},
             mx: 4,
-            height: 425,
+            height:{xs:455,lg:425},
           }}
         >
         {/* desktop version of stepper  */}
@@ -589,12 +590,15 @@ const BasicNew = () => {
           >
             <Box
               sx={{
-                p: 3,
-                width: "85%",
+                p:{xs:1,lg:3},
+                // pl:{xs:1.5,lg:0},
+                width:{xs:"100%",lg:"85%"},
                 borderRadius: "15px",
-
+               display:{xs:"grid",lg:"block"},
+               placeItems:{xs:"center",lg:"none"},
                 overflowY: "scroll",
-                height: 270,
+                overflowX:{xs:"hidden"},
+                height:{xs:365,lg:270},
                 "&::-webkit-scrollbar": {
                   width: "0.2em",
                 },
@@ -609,6 +613,7 @@ const BasicNew = () => {
               }}
             >
               {_renderStepContent(activeStep)}
+              {/* <Education/> */}
             </Box>
           </Box>
         </Box>

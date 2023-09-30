@@ -546,241 +546,460 @@ const PersonalDT = (props) => {
   //  backgroundColor: "rgba(255, 255, 255, .15)",
   return (
     <>
-      <Box sx={{}}>
-        <Box
-          sx={{ mb: 1, p:{xs:0,lg:1}, borderRadius: "5px" }}
-          onClick={handleClickPersonal}
-        >
-          {/* {openPersonal ? <ExpandLess sx={{color:"#fff"}} /> : <ExpandMore sx={{color:"#fff"}} />} */}
-          <Typography
-            sx={{
-              color: "#fff",
-              fontWeight: "bold",
-              textAlign: "center",
-              fontSize: "23px",
-            }}
-          >
-            Personal Details
-          </Typography>
-        </Box>
-        
-        <Box
+    <Box sx={{display: { xs: "none", lg: "block"}}}>
+      <Box
+        sx={{ mb: 1, p: 1, borderRadius: "5px" }}
+        onClick={handleClickPersonal}
+      >
+        {/* {openPersonal ? <ExpandLess sx={{color:"#fff"}} /> : <ExpandMore sx={{color:"#fff"}} />} */}
+        <Typography
           sx={{
-            display: {xs:"",lg:"flex"},
-            justifyContent: "space-between",
-            mt: 1,
-            mb: 1,
+            color: "#fff",
+            fontWeight: "bold",
+            textAlign: "center",
+            fontSize: "23px",
           }}
         >
-          <Box>
-            <Typography
-              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
-            >
-              First Name <span style={{ color: "red" }}>*</span>
-            </Typography>
-            <BootstrapInput
-              onChange={handleChangeName}
-              value={name}
-              sx={{ width:{xs:280,lg:480}, }}
-              size="small"
-              helperText={name ? "" : "This filed is required"}
-              onKeyPress={(e) => {
-                if (new RegExp(/[a-zA-Z]/).test(e.key)) {
-                } else e.preventDefault();
-              }}
-            />
-            {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
-          </Box>
-          <Box>
-            <Typography
-              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
-            >
-              Middle Name
-            </Typography>
-            <BootstrapInput
-              onChange={handleChangeMiddle}
-              value={middleName}
-              sx={{ width:{xs:280,lg:480}, }}
-              size="small"
-              helperText={name ? "" : "This filed is required"}
-              onKeyPress={(e) => {
-                if (new RegExp(/[a-zA-Z]/).test(e.key)) {
-                } else e.preventDefault();
-              }}
-            />
-            {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
-          </Box>
-         
-        </Box>
-        <Box
-          sx={{
-            display: {xs:"",lg:"flex"},
-            justifyContent: "space-between",
-            mt: 1,
-            mb: 1,
-          }}
-        >
-           <Box>
-            <Typography
-              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
-            >
-              Last Name <span style={{ color: "red" }}>*</span>
-            </Typography>
-            <BootstrapInput
-              onChange={handleChangelast}
-              value={lastName}
-              sx={{ width:{xs:280,lg:480}, }}
-              size="small"
-              helperText={name ? "" : "This filed is required"}
-              onKeyPress={(e) => {
-                if (new RegExp(/[a-zA-Z]/).test(e.key)) {
-                } else e.preventDefault();
-              }}
-            />
-            {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
-          </Box>
-          <Box>
-            <Typography
-              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
-            >
-              Email ID <span style={{ color: "red" }}>*</span>
-            </Typography>
-            <TextField
-              type="email"
-              sx={{ width:{xs:280,lg:480}, background: "#d9d9d9", borderRadius: "5px" }}
-              size="small"
-              value={email}
-              inputProps={{ readOnly: true }}
-              onChange={handleChangeEmail}
-            />
-          </Box>
-         
-        </Box>
-
-        <Box
-          sx={{
-            display: {xs:"",lg:"flex"},
-            justifyContent: "space-between",
-            mt: 1,
-            mb: 3,
-          }}
-        >
-           <Box>
-            <Typography
-              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
-            >
-              Phone Number <span style={{ color: "red" }}>*</span>
-            </Typography>
-            {/* <TextField
-              type="number"
-              error={!isPhoneNumberValid}
-        helperText={!isPhoneNumberValid ? 'Invalid phone number format' : ''}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <PhoneIcon color={!isPhoneNumberValid ? 'error' : 'action'} />
-            </InputAdornment>
-          ),
-        }}
-              sx={{ width:{xs:280,lg:480},background:"#fff",borderRadius:"5px" }}
-              size="small"
-              value={number}
-              onChange={handleChangeNumber}
-            /> */}
-             <PhoneInput
-            label=""
-         
-          country={'in'}
-         size="small"
-        
-  placeholder="Enter phone number"
-  value={number}
-  onChange={setnumber}
- 
-  />
-          </Box>
-          <Box>
-            <Typography
-              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
-            >
-              Gender <span style={{ color: "red" }}>*</span>
-            </Typography>
-            <FormControl fullWidth>
-              {/* <InputLabel id="demo-simple-select-label">Gender</InputLabel> */}
-              <Select
-                size="small"
-                sx={{ width:{xs:280,lg:480}, background: "#fff" }}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={gender}
-                label="Gender"
-                onChange={handleChangeGender}
-              >
-                <MenuItem value={"Male"}>Male</MenuItem>
-                <MenuItem value={"Female"}>Female</MenuItem>
-                <MenuItem value={"Others"}>Others</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-
-         
-        </Box>
-        <Box
+          Personal Details
+        </Typography>
+      </Box>
+      
+      <Box
         sx={{
-          display: {xs:"",lg:"flex"},
+          display: "flex",
+          justifyContent: "space-between",
+          mt: 1,
+          mb: 1,
+        }}
+      >
+        <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            First Name <span style={{ color: "red" }}>*</span>
+          </Typography>
+          <BootstrapInput
+            onChange={handleChangeName}
+            value={name}
+            sx={{ width: 480 }}
+            size="small"
+            helperText={name ? "" : "This filed is required"}
+            onKeyPress={(e) => {
+              if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+              } else e.preventDefault();
+            }}
+          />
+          {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
+        </Box>
+        <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Middle Name
+          </Typography>
+          <BootstrapInput
+            onChange={handleChangeMiddle}
+            value={middleName}
+            sx={{ width: 480 }}
+            size="small"
+            helperText={name ? "" : "This filed is required"}
+            onKeyPress={(e) => {
+              if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+              } else e.preventDefault();
+            }}
+          />
+          {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
+        </Box>
+       
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          mt: 1,
+          mb: 1,
+        }}
+      >
+         <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Last Name <span style={{ color: "red" }}>*</span>
+          </Typography>
+          <BootstrapInput
+            onChange={handleChangelast}
+            value={lastName}
+            sx={{ width: 480 }}
+            size="small"
+            helperText={name ? "" : "This filed is required"}
+            onKeyPress={(e) => {
+              if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+              } else e.preventDefault();
+            }}
+          />
+          {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
+        </Box>
+        <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Email ID <span style={{ color: "red" }}>*</span>
+          </Typography>
+          <TextField
+            type="email"
+            sx={{ width: 480, background: "#d9d9d9", borderRadius: "5px" }}
+            size="small"
+            value={email}
+            inputProps={{ readOnly: true }}
+            onChange={handleChangeEmail}
+          />
+        </Box>
+       
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
           justifyContent: "space-between",
           mt: 1,
           mb: 3,
         }}
-        >
+      >
+         <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Phone Number <span style={{ color: "red" }}>*</span>
+          </Typography>
+          {/* <TextField
+            type="number"
+            
+            error={!isPhoneNumberValid}
+      helperText={!isPhoneNumberValid ? 'Invalid phone number format' : ''}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <PhoneIcon color={!isPhoneNumberValid ? 'error' : 'action'} />
+          </InputAdornment>
+        ),
+      }}
+            
+            sx={{ width: 480,background:"#fff",borderRadius:"5px" }}
+            size="small"
+            value={number}
+            onChange={handleChangeNumber}
+          /> */}
+          <PhoneInput
+          label=""
+          // inputClass="btttt"
+        country={'in'}
+       size="small"
+      
+placeholder="Enter phone number"
+value={number}
+onChange={setnumber}
+
+/>
+        </Box>
         <Box>
-            <Typography
-              sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
-            >
-              Date of Birth <span style={{ color: "red" }}>*</span>
-            </Typography>
-            <BootstrapInput
-              type="date"
-              sx={{ width:{xs:280,lg:480}, }}
-              value={dob}
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Gender <span style={{ color: "red" }}>*</span>
+          </Typography>
+          <FormControl fullWidth>
+            {/* <InputLabel id="demo-simple-select-label">Gender</InputLabel> */}
+            <Select
               size="small"
-              inputProps={{ max: today }}
-              onChange={handleChangeDob}
-            />
-          </Box>
+              sx={{ width: 480, background: "#fff" }}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={gender}
+              label="Gender"
+              onChange={handleChangeGender}
+            >
+              <MenuItem value={"Male"}>Male</MenuItem>
+              <MenuItem value={"Female"}>Female</MenuItem>
+              <MenuItem value={"Others"}>Others</MenuItem>
+            </Select>
+          </FormControl>
         </Box>
 
        
-        <Box sx={{ display: "flex", justifyContent: "end", mt: 1 }}>
-          <Button
-            variant="conatained"
-            size="small"
-            sx={{
-              color: "#fff",
-              background: "#fdb714",
-              "&:hover": { background: "#fdb714", color: "#fff" },
-            }}
-            onClick={handleNext}
-            disabled={nxt}
+      </Box>
+      <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        mt: 1,
+        mb: 3,
+      }}
+      >
+      <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
           >
-            Submit
-          </Button>
+            Date of Birth <span style={{ color: "red" }}>*</span>
+          </Typography>
+          <BootstrapInput
+            type="date"
+            sx={{ width: 480 }}
+            value={dob}
+            inputProps={{ max: today }}
+            size="small"
+            onChange={handleChangeDob}
+          />
         </Box>
       </Box>
 
+     
+      <Box sx={{ display: "flex", justifyContent: "end", mt: 1 }}>
+        <Button
+          variant="conatained"
+          size="small"
+          sx={{
+            color: "#fff",
+            background: "#fdb714",
+            "&:hover": { background: "#fdb714", color: "#fff" },
+          }}
+          onClick={handleNext}
+          disabled={nxt}
+        >
+          Submit
+        </Button>
+      </Box>
+    </Box>
 
-      {/* mobile version */}
 
+    {/* mobile version */}
 
-
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={backopen}
+    <Box sx={{display: { xs: "block", lg: "none"}}}>
+      <Box
+        sx={{ mb: 1, p: 1, borderRadius: "5px" }}
+        onClick={handleClickPersonal}
       >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      <ToastContainer />
-    </>
+        {/* {openPersonal ? <ExpandLess sx={{color:"#fff"}} /> : <ExpandMore sx={{color:"#fff"}} />} */}
+        <Typography
+          sx={{
+            color: "#fff",
+            fontWeight: "bold",
+            textAlign: "center",
+            fontSize: "23px",
+          }}
+        >
+          Personal Details
+        </Typography>
+      </Box>
+      
+      <Box
+        sx={{
+          // display: "flex",
+          // justifyContent: "space-between",
+          mt: 1,
+          mb: 1,
+        }}
+      >
+        <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            First Name <span style={{ color: "red" }}>*</span>
+          </Typography>
+          <BootstrapInput
+            onChange={handleChangeName}
+            value={name}
+            sx={{ width: 280 }}
+            size="small"
+            helperText={name ? "" : "This filed is required"}
+            onKeyPress={(e) => {
+              if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+              } else e.preventDefault();
+            }}
+          />
+          {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
+        </Box>
+        <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Middle Name
+          </Typography>
+          <BootstrapInput
+            onChange={handleChangeMiddle}
+            value={middleName}
+            sx={{ width: 280 }}
+            size="small"
+            helperText={name ? "" : "This filed is required"}
+            onKeyPress={(e) => {
+              if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+              } else e.preventDefault();
+            }}
+          />
+          {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
+        </Box>
+        
+      </Box>
+      <Box
+        sx={{
+        
+          mt: 1,
+          mb: 1,
+        }}
+      >
+        <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Last Name <span style={{ color: "red" }}>*</span>
+          </Typography>
+          <BootstrapInput
+            onChange={handleChangelast}
+            value={lastName}
+            sx={{ width: 280 }}
+            size="small"
+            helperText={name ? "" : "This filed is required"}
+            onKeyPress={(e) => {
+              if (new RegExp(/[a-zA-Z]/).test(e.key)) {
+              } else e.preventDefault();
+            }}
+          />
+          {/* {name?"":<Typography sx={{color:"red"}}>This Filed is Required</Typography>} */}
+        </Box>
+        <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Email ID <span style={{ color: "red" }}>*</span>
+          </Typography>
+          <TextField
+            type="email"
+            sx={{ width: 280, background: "#d9d9d9", borderRadius: "5px" }}
+            size="small"
+            value={email}
+            inputProps={{ readOnly: true }}
+            onChange={handleChangeEmail}
+          />
+        </Box>
+       
+      </Box>
+
+      <Box
+        sx={{
+          
+          mt: 1,
+          mb: 1,
+        }}
+      >
+         <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Phone Number <span style={{ color: "red" }}>*</span>
+          </Typography>
+          {/* <TextField
+            type="number"
+           
+            error={!isPhoneNumberValid}
+      helperText={!isPhoneNumberValid ? 'Invalid phone number format' : ''}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <PhoneIcon color={!isPhoneNumberValid ? 'error' : 'action'} />
+          </InputAdornment>
+        ),
+      }}
+            sx={{ width: 280,background:"#fff",borderRadius:"5px" }}
+            size="small"
+            value={number}
+            onChange={handleChangeNumber}
+          /> */}
+           <PhoneInput
+        
+        country={'in'}
+       size="small"
+      
+placeholder="Enter phone number"
+value={number}
+onChange={setnumber}
+
+/>
+        </Box>
+        <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Gender <span style={{ color: "red" }}>*</span>
+          </Typography>
+          <FormControl fullWidth>
+            {/* <InputLabel id="demo-simple-select-label">Gender</InputLabel> */}
+            <Select
+              size="small"
+              sx={{ width: 280, background: "#fff" }}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={gender}
+              label="Gender"
+              onChange={handleChangeGender}
+            >
+              <MenuItem value={"Male"}>Male</MenuItem>
+              <MenuItem value={"Female"}>Female</MenuItem>
+              <MenuItem value={"Others"}>Others</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+
+        
+      </Box>
+      <Box 
+      sx={{
+          
+        mt: 1,
+        mb: 3,
+      }}
+      >
+      <Box>
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: "14px", color: "#ffffff" }}
+          >
+            Date of Birth <span style={{ color: "red" }}>*</span>
+          </Typography>
+          <BootstrapInput
+            type="date"
+            sx={{ width: 280 }}
+            value={dob}
+            size="small"
+            inputProps={{ max: today }}
+            onChange={handleChangeDob}
+          />
+        </Box>
+      </Box>
+
+      
+      <Box sx={{ display: "flex", justifyContent: "end", mt: 1 }}>
+        <Button
+          variant="conatained"
+          size="small"
+          sx={{
+            color: "#fff",
+            background: "#fdb714",
+            "&:hover": { background: "#fdb714", color: "#fff" },
+          }}
+          onClick={handleNext}
+          disabled={nxt}
+        >
+          Submit
+        </Button>
+      </Box>
+    </Box>
+
+    <Backdrop
+      sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={backopen}
+    >
+      <CircularProgress color="inherit" />
+    </Backdrop>
+    <ToastContainer />
+  </>
   );
 };
 export default PersonalDT;

@@ -205,10 +205,10 @@ const Laststep=(props)=>{
     // Your admission request has been successfully submitted. You'll receive an admission confirmation letter from XLRI within 7 working days
 
     return (
-        <>
+      <>
       {/* desktop version */}
 
-       <Box sx={{display: { xs: "none", lg: "flex"},justifyContent:"center",alignItems:"center"}}>
+      <Box sx={{display: { xs: "none", lg: "flex"},justifyContent:"center",alignItems:"center"}}>
        {/* <CheckCircleIcon sx={{color:"green",fontSize:"55px"}}/> */}
               <Box sx={{background:"#fff",borderRadius:"5px",border:"1px solid #fdb714",px:3,pb:3,width:330}}>
               <Box sx={{textAlign:"center"}}>
@@ -250,9 +250,9 @@ const Laststep=(props)=>{
            {/* mobile version */}
            <Box sx={{display: { xs: "flex", lg: "none"},justifyContent:"center",alignItems:"center"}}>
        {/* <CheckCircleIcon sx={{color:"green",fontSize:"55px"}}/> */}
-              <Box sx={{background:"#fff",borderRadius:"5px",border:"1px solid #fdb714",px:3,pb:3,width:350}}>
+              <Box sx={{background:"#fff",borderRadius:"5px",border:"1px solid #fdb714",px:3,pb:3,width:230}}>
               <Box sx={{textAlign:"center"}}>
-        <CheckCircleIcon sx={{color:"#fdb714",fontSize:"80px",pt:1,pb:0.5}}/>
+        <CheckCircleIcon sx={{color:"#fdb714",fontSize:"80px",pt:1,pb:0.5}}/> 
        </Box>
                 <Typography sx={{textAlign:"center",fontWeight:"500",fontSize:"20px",mb:0.5}}>Thank You!</Typography>
                 <Typography sx={{textAlign:"center",fontWeight:"300",fontSize:"16px",mb:3}}>
@@ -287,7 +287,6 @@ const Laststep=(props)=>{
                 
               </Box>
             </Box>
-      
             
         </>
     )

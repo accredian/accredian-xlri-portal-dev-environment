@@ -573,7 +573,7 @@ const BasicDT = () => {
             py:{xs:3,lg:3},
            px:{xs:1,lg:3},
             mx: 4,
-            height:{xs:455,lg:425,xl:435},
+            height:{xs:455,lg:425},
           }}
         >
         {/* desktop version of stepper  */}
@@ -676,10 +676,13 @@ const BasicDT = () => {
             <Box
               sx={{
                 p:{xs:1,lg:3},
+                // pl:{xs:1.5,lg:0},
                 width:{xs:"100%",lg:"85%"},
                 borderRadius: "15px",
-
+               display:{xs:"grid",lg:"block"},
+               placeItems:{xs:"center",lg:"none"},
                 overflowY: "scroll",
+                overflowX:{xs:"hidden"},
                 height:{xs:365,lg:270},
                 "&::-webkit-scrollbar": {
                   width: "0.2em",

@@ -1152,7 +1152,7 @@ const PaymentNew = (props) => {
               borderRadius: "5px",
               border: "1px solid #fdb714",
               p: 3,
-              width: 300,
+              width: {lg:300,xs:230},
               mt:4
             }}
           >
@@ -1271,7 +1271,7 @@ const PaymentNew = (props) => {
                   borderRadius: "5px",
                   border: "1px solid #fdb714",
                   p: 3,
-                  width: 300,
+                  width: {lg:300,xs:230},
                 }}
               >
                 <BorderLinearProgress
@@ -1366,7 +1366,7 @@ const PaymentNew = (props) => {
                     </Button>
                 </Box>
           </Box> */}
-           <Box sx={{background:"#fff",borderRadius:"8px",border:"1px solid #fdb714",px:1,pb:1.5,width:460}}>
+           <Box sx={{background:"#fff",borderRadius:"8px",border:"1px solid #fdb714",px:1,pb:1.5,width:{lg:460,xs:250}}}>
      <Box sx={{textAlign:"center",my:1,}}>
      <img src={icon} alt="logo"  /> 
 </Box>
@@ -2040,7 +2040,7 @@ to your transaction.
               borderRadius: "5px",
               border: "1px solid #fdb714",
               p: 3,
-              width: 300,
+              width:{lg:300,xs:230},
             }}
           >
             <BorderLinearProgress

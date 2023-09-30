@@ -751,7 +751,7 @@ const PersonalNew = (props) => {
             <BootstrapInput
               onChange={handleChangeName}
               value={name}
-              sx={{ width: 220 }}
+              sx={{ width: 280 }}
               size="small"
               helperText={name ? "" : "This filed is required"}
               onKeyPress={(e) => {
@@ -770,7 +770,7 @@ const PersonalNew = (props) => {
             <BootstrapInput
               onChange={handleChangeMiddle}
               value={middleName}
-              sx={{ width: 220 }}
+              sx={{ width: 280 }}
               size="small"
               helperText={name ? "" : "This filed is required"}
               onKeyPress={(e) => {
@@ -798,7 +798,7 @@ const PersonalNew = (props) => {
             <BootstrapInput
               onChange={handleChangelast}
               value={lastName}
-              sx={{ width: 220 }}
+              sx={{ width: 280 }}
               size="small"
               helperText={name ? "" : "This filed is required"}
               onKeyPress={(e) => {
@@ -816,7 +816,7 @@ const PersonalNew = (props) => {
             </Typography>
             <TextField
               type="email"
-              sx={{ width: 220, background: "#d9d9d9", borderRadius: "5px" }}
+              sx={{ width: 280, background: "#d9d9d9", borderRadius: "5px" }}
               size="small"
               value={email}
               inputProps={{ readOnly: true }}
@@ -851,7 +851,7 @@ const PersonalNew = (props) => {
             </InputAdornment>
           ),
         }}
-              sx={{ width: 220,background:"#fff",borderRadius:"5px" }}
+              sx={{ width: 280,background:"#fff",borderRadius:"5px" }}
               size="small"
               value={number}
               onChange={handleChangeNumber}
@@ -877,7 +877,7 @@ const PersonalNew = (props) => {
               {/* <InputLabel id="demo-simple-select-label">Gender</InputLabel> */}
               <Select
                 size="small"
-                sx={{ width: 220, background: "#fff" }}
+                sx={{ width: 280, background: "#fff" }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={gender}
@@ -908,7 +908,7 @@ const PersonalNew = (props) => {
             </Typography>
             <BootstrapInput
               type="date"
-              sx={{ width: 220 }}
+              sx={{ width: 280 }}
               value={dob}
               size="small"
               inputProps={{ max: today }}

@@ -676,10 +676,13 @@ const BasicGM = () => {
             <Box
               sx={{
                 p:{xs:1,lg:3},
+                // pl:{xs:1.5,lg:0},
                 width:{xs:"100%",lg:"85%"},
                 borderRadius: "15px",
-
+               display:{xs:"grid",lg:"block"},
+               placeItems:{xs:"center",lg:"none"},
                 overflowY: "scroll",
+                overflowX:{xs:"hidden"},
                 height:{xs:365,lg:270},
                 "&::-webkit-scrollbar": {
                   width: "0.2em",
