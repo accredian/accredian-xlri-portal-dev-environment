@@ -394,7 +394,7 @@ const fetchEnrol=()=>{
         method: "post",
         url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/new-data-test.php`,
         data: {
-          type: "insert_admissions_details_pubsub_test",
+          type: "insert_admissions_details_pubsub",
           user_id: parseInt(localStorage.getItem("user_id")),
           payment_id: paymentid,
           firstname: localStorage.getItem("firstname"),
@@ -423,8 +423,8 @@ const fetchEnrol=()=>{
   };
   const checkoutHandler = async (amount) => {
     const options = {
-      // key: "rzp_live_kuHNpOKPMVihkI",
-      key:"rzp_test_KAHiAuZT84j7ih",
+      key: "rzp_live_kuHNpOKPMVihkI",
+      // key:"rzp_test_KAHiAuZT84j7ih",
       amount: addmissionPayment * 100,
       currency: "INR",
       name: "Accredian",

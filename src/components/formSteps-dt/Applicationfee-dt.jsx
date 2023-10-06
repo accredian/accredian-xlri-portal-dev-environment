@@ -284,7 +284,7 @@ const ApplicationFee = (props) => {
           method: "post",
           url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/new-data-test.php`,
           data: {
-            type: "insert_application_details_pubsub_test",
+            type: "insert_application_details_pubsub",
             user_id: parseInt(localStorage.getItem("user_id")),
             payment_id: paymentid,
             firstname: localStorage.getItem("firstname"),
@@ -340,7 +340,7 @@ const ApplicationFee = (props) => {
           method: "post",
           url: `${process.env.REACT_APP_BASE_URL}/xlri-backend/new-data-test.php`,
           data: {
-            type: "insert_full_payment_details_pubsub_test",
+            type: "insert_full_payment_details_pubsub",
             user_id: parseInt(localStorage.getItem("user_id")),
             payment_id: paymentid,
             firstname: localStorage.getItem("firstname"),
@@ -530,8 +530,8 @@ const ApplicationFee = (props) => {
   // console.log(course[0].pcode,"check")
   const checkoutHandler = async (amount) => {
     const options = {
-      // key: "rzp_live_kuHNpOKPMVihkI",
-      key:process.env.REACT_APP_RAZORPAY_KEY,
+      key: "rzp_live_kuHNpOKPMVihkI",
+      // key:process.env.REACT_APP_RAZORPAY_KEY,
       amount: amount * 100,
       currency: "INR",
       name: "Accredian",
