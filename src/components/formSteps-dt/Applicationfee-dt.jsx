@@ -293,7 +293,7 @@ const ApplicationFee = (props) => {
             email: localStorage.getItem("email"),
             batch: batchid,
             program: courses,
-            amount: 1000000,
+            amount: 100,
           },
         }).then((response) => {
           if (response.data.status == 200) {
@@ -899,7 +899,7 @@ const ApplicationFee = (props) => {
                   "&:hover": { background: "#fdb714", color: "#fff" },
                 }}
                 onClick={() => {
-                  checkoutHandler(10000);
+                  checkoutHandler(1);
                 }}
               >
                 Pay ₹10,000
@@ -1130,7 +1130,7 @@ const ApplicationFee = (props) => {
                   "&:hover": { background: "#fdb714", color: "#fff" },
                 }}
                 onClick={() => {
-                  checkoutHandler(10000);
+                  checkoutHandler(1);
                 }}
               >
                 Pay ₹10,000
