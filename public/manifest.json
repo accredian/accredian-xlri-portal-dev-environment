@@ -1,10 +1,13 @@
 {
-  "short_name": "XLRI",
+  "short_name": "Accredian",
+  "name": "Accredian",
   "icons": [
     {
-      "src": "xlri.png",
-      "type": "image/png"
+      "src": "icon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
     }
+   
   ],
   "start_url": ".",
   "display": "standalone",
